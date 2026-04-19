@@ -109,19 +109,34 @@ const testimonials = [
 
 const faqs = [
   {
-    question: 'Is hydration provided throughout the route?',
+    question: 'When is the Jaipur Ultra 2026 scheduled?',
     answer:
-      'Yes, we have 12 major aid stations for the 50K and 6 for the 25K. Each station provides water, electrolytes, bananas, and local salt-citrus drinks to combat heat.',
+      'The Jaipur Ultra will be held on 1st November 2026. The race will start from the iconic Jal Mahal at 05:00 HRS. Please arrive at least 1 hour early for bib collection, kit distribution, and a pre-race briefing.',
   },
   {
-    question: 'What is the mandatory gear list?',
+    question: 'What are the race categories and cut-off times?',
     answer:
-      'All runners must carry a 1L hydration pack, whistle, emergency foil blanket, and a fully charged mobile phone. Headlamps are required for 50K participants.',
+      '50 KM Ultra Marathon – Cut-off: 8 hours\n25 KM Challenge – Cut-off: 4 hours\n\nRunners must cross designated checkpoints within the allotted cut-off times to continue in the race.',
   },
   {
-    question: 'Are there age restrictions?',
+    question: 'What are the basic race rules?',
     answer:
-      'Participants must be 18 years or older on race day for the 50K, and 16 or older (with parental consent) for the 25K.',
+      '• Follow the marked route at all times — shortcuts will result in disqualification.\n• No littering — carry your waste until the next aid station.\n• Headphones are discouraged for safety reasons.\n• Bib numbers must be worn visibly on the front throughout the race.\n• Support crew is only allowed at designated aid stations.',
+  },
+  {
+    question: 'How do I reach the Jaipur Ultra start line?',
+    answer:
+      'The race starts from Jal Mahal, located on the Jaipur-Amer Road, easily accessible by:\n\nAir – Jaipur International Airport (20–25 mins drive)\nRail – Jaipur Junction Railway Station (20 mins drive)\nRoad – Well connected via NH48 and NH52.\n\nWe recommend staying in Jaipur city the night before for a stress-free race morning.',
+  },
+  {
+    question: 'What is the refund and cancellation policy?',
+    answer:
+      '• Cancellations made up to 30 days before race day – 50% refund.\n• Cancellations made less than 30 days before race day – no refund.\n• In case of extreme weather or government restrictions, the event will be rescheduled and entries will be transferred to the new date.',
+  },
+  {
+    question: 'What should I carry for the race?',
+    answer:
+      'We recommend:\n\n• Hydration pack or handheld bottles\n• Cap or headgear for sun protection\n• Energy gels or snacks\n• Lightweight running apparel suitable for winter mornings in Jaipur\n• A sense of adventure!',
   },
 ]
 
@@ -205,24 +220,36 @@ function CountdownTimer() {
   )
 }
 
-function FAQItem({ faq, isOpen, onToggle }) {
+function FAQItem({ faq, isOpen, onToggle, isLightMode }) {
   return (
-    <div className="group bg-background">
+    <div className="group relative bg-transparent transition-all duration-500">
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-6 px-6 py-8 text-left transition-colors hover:bg-surface-container"
+        className="flex w-full items-center justify-between gap-6 py-8 text-left transition-all"
       >
-        <span className="font-title text-lg uppercase tracking-widest md:text-xl">
-          {faq.question}
-        </span>
-        <span className="material-symbols-outlined text-primary-container">
-          {isOpen ? 'remove' : 'add'}
-        </span>
+        <div className="relative flex-1 overflow-hidden">
+          <span className={`block font-title text-2xl uppercase tracking-[0.05em] transition-all duration-500 md:text-3xl ${isOpen ? 'translate-x-4 text-primary-container' : (isLightMode ? 'text-[#2f1c12]' : 'text-white')}`}>
+            {faq.question}
+          </span>
+          {/* Animated Underline */}
+          <div className={`mt-2 h-[2px] transition-all duration-700 ${isOpen ? 'w-full bg-primary-container' : 'w-12 bg-outline-variant/30 group-hover:w-24 group-hover:bg-primary-container/50'}`}></div>
+        </div>
+
+        <div className={`flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all duration-500 ${isOpen ? 'rotate-180 border-primary-container bg-primary-container text-on-primary-container shadow-[0_0_25px_rgba(243,99,35,0.4)]' : (isLightMode ? 'border-[#d6aa90] text-[#7a4a2b]' : 'border-white/20 text-white hover:border-white/50')}`}>
+          <span className="material-symbols-outlined text-3xl font-bold">
+            {isOpen ? 'remove' : 'add'}
+          </span>
+        </div>
       </button>
-      <div className={`grid transition-all duration-300 ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+
+      <div className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <p className="px-6 pb-8 leading-relaxed text-on-surface-variant">{faq.answer}</p>
+          <div className="pb-12 pr-12 md:pl-20">
+            <p className={`whitespace-pre-line text-lg leading-relaxed md:text-xl lg:max-w-4xl ${isLightMode ? 'text-[#5a321d]' : 'text-on-surface-variant'}`}>
+              {faq.answer}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -283,8 +310,12 @@ export default function Home() {
     <>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-6 md:px-8 lg:px-12">
-          <a href="#top" className="shrink-0">
-            <img src="/JU_Logo.png" alt="Jaipur Ultra logo" className="h-14 w-auto drop-shadow-[0_10px_30px_rgba(35,15,8,0.2)] md:h-16" />
+          <a href="#top" className="flex items-center gap-3 shrink-0 group">
+            <img src="/JU_Logo.png" alt="Jaipur Ultra logo" className="h-14 w-auto drop-shadow-[0_10px_30px_rgba(35,15,8,0.2)] md:h-16 transition-transform group-hover:scale-105" />
+            <div className="flex flex-col leading-[0.75] transition-transform group-hover:translate-x-1">
+              <span className="font-headline text-2xl font-black tracking-tight text-white md:text-3xl">JAIPUR</span>
+              <span className="font-headline text-xl font-black tracking-tighter text-[#ff9800] md:text-2xl">ULTRA</span>
+            </div>
           </a>
           <div className={`hidden items-center space-x-10 font-title text-xl font-semibold tracking-wide md:flex ${isLightMode ? 'text-[#5a321d]' : 'text-[#fff4ef]'}`}>
             <a className={`transition-colors ${isLightMode ? 'hover:text-[#b85c18]' : 'hover:text-[#ffdfc7]'}`} href="#top">
@@ -399,7 +430,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12">
+          <div 
+            className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12"
+            style={{ transform: `translateY(-${scrollY * 0.25}px)`, opacity: Math.max(0, 1 - scrollY / 600) }}
+          >
             <div className="mt-4 max-w-4xl space-y-4 md:-mt-2">
               <div className="font-title text-sm font-semibold tracking-[0.35em] text-[#fff0eb] md:text-base">
                 JAIPUR, RAJASTHAN
@@ -498,7 +532,7 @@ export default function Home() {
             {raceCategories.map((category) => (
               <article
                 key={category.title}
-                className="group relative overflow-hidden border-l-4 border-transparent bg-surface-container-low p-8 transition-all duration-500 hover:border-primary-container md:p-12"
+                className="group relative overflow-hidden rounded-3xl border-l-4 border-transparent bg-surface-container-low p-8 transition-all duration-500 hover:border-primary-container md:p-12"
               >
                 <div className="pointer-events-none absolute -right-8 -top-8 select-none font-headline text-[160px] leading-none text-on-surface/5 md:text-[200px]">
                   {category.distance}
@@ -548,7 +582,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="relative h-[500px] overflow-hidden bg-background lg:col-span-2">
+            <div className="relative h-[500px] overflow-hidden rounded-3xl bg-background lg:col-span-2">
               <img
                 alt="Graphic route map of Jaipur with a highlighted ultra marathon path"
                 className="h-full w-full object-cover opacity-60 grayscale"
@@ -580,7 +614,7 @@ export default function Home() {
           </div>
           <div className="grid auto-rows-[180px] grid-cols-2 gap-4 px-4 md:auto-rows-[190px] md:grid-cols-4 lg:h-[800px] lg:auto-rows-auto">
             {galleryImages.map((image) => (
-              <div key={image.alt} className={`group relative overflow-hidden ${image.className}`}>
+              <div key={image.alt} className={`group relative overflow-hidden rounded-2xl ${image.className}`}>
                 <img
                   alt={image.alt}
                   className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0"
@@ -596,8 +630,10 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-6 md:px-8">
             <div className="grid grid-cols-1 gap-px border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-3">
               {whyAttend.map((item) => (
-                <article key={item.number} className="space-y-6 bg-background p-10 md:p-12">
-                  <div className="font-headline text-5xl text-outline opacity-20">{item.number}</div>
+                <article key={item.number} className="group space-y-6 rounded-2xl bg-background p-10 transition-all duration-300 hover:bg-surface-container-low md:p-12">
+                  <div className={`font-headline text-5xl text-outline opacity-20 transition-all duration-500 ${isLightMode ? 'group-hover:text-[#df8127] group-hover:opacity-100 group-hover:[-webkit-text-stroke-color:#df8127]' : 'group-hover:text-white group-hover:opacity-100 group-hover:[-webkit-text-stroke-color:white]'}`}>
+                    {item.number}
+                  </div>
                   <h3 className="font-headline text-3xl uppercase">{item.title}</h3>
                   <p className="leading-relaxed text-on-surface-variant">{item.description}</p>
                 </article>
@@ -613,8 +649,8 @@ export default function Home() {
             <div
               className={`relative overflow-hidden rounded-[2rem] px-6 py-16 md:px-10 lg:px-14 ${
                 isLightMode
-                  ? 'border border-[#edd5c3] bg-[radial-gradient(circle_at_top,rgba(224,148,92,0.12),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(214,125,74,0.1),transparent_24%),linear-gradient(180deg,#fffdf9_0%,#f8ebde_100%)] shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
-                  : 'border border-white/8 bg-[radial-gradient(circle_at_top,rgba(70,103,126,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(49,81,102,0.18),transparent_28%),linear-gradient(180deg,#18161d_0%,#100f14_100%)] shadow-[0_30px_120px_rgba(0,0,0,0.45)]'
+                  ? 'bg-[radial-gradient(circle_at_top,rgba(224,148,92,0.12),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(214,125,74,0.1),transparent_24%),linear-gradient(180deg,#fffdf9_0%,#f8ebde_100%)] shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
+                  : 'bg-[radial-gradient(circle_at_top,rgba(70,103,126,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(49,81,102,0.18),transparent_28%),linear-gradient(180deg,#18161d_0%,#100f14_100%)] shadow-[0_30px_120px_rgba(0,0,0,0.45)]'
               }`}
             >
               <div
@@ -828,17 +864,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="faq" className="mx-auto max-w-4xl px-6 py-24">
-          <h2 className="mb-16 text-center font-headline text-5xl uppercase md:text-6xl">
-            COMMON <span className="text-primary-container">QUESTIONS</span>
-          </h2>
-          <div className="space-y-px bg-outline-variant/20">
+        <section id="faq" className="mx-auto w-full max-w-[1440px] px-6 py-32 md:px-12">
+          <div className="mb-20 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
+            <h2 className="font-headline text-6xl uppercase leading-none md:text-8xl">
+              COMMON <span className="text-primary-container">QUESTIONS</span>
+            </h2>
+            <div className="font-title text-xl tracking-[0.3em] text-secondary">HAVE A DOUBT?</div>
+          </div>
+          <div className="divide-y divide-outline-variant/10">
             {faqs.map((faq, index) => (
               <FAQItem
                 key={faq.question}
                 faq={faq}
                 isOpen={openFaqIndex === index}
                 onToggle={() => setOpenFaqIndex(openFaqIndex === index ? -1 : index)}
+                isLightMode={isLightMode}
               />
             ))}
           </div>
@@ -912,6 +952,22 @@ export default function Home() {
           BASECAMP &middot; KM 00
         </div>
       </div>
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`fixed bottom-8 left-6 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-2xl transition-all duration-500 md:bottom-10 md:left-10 ${
+          scrollY > 400
+            ? "translate-y-0 opacity-100 scale-100"
+            : "translate-y-20 opacity-0 scale-50"
+        } ${
+          isLightMode
+            ? "bg-[#df8127] text-white hover:bg-[#c96e1f] shadow-[#df8127]/30"
+            : "bg-[#f36323] text-white hover:bg-[#ff7a3d] shadow-[#f36323]/40"
+        } hover:-translate-y-1 hover:rotate-[360deg]`}
+        aria-label="Back to Top"
+      >
+        <span className="material-symbols-outlined text-3xl font-bold">arrow_upward</span>
+      </button>
     </>
   )
 }
