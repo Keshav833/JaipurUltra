@@ -1,0 +1,66 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "surface-bright": "#3e3834",
+        "on-tertiary": "#402c13",
+        "on-error-container": "#ffdad6",
+        "tertiary-container": "#a98c6b",
+        "on-error": "#690005",
+        "secondary": "#d1c5ae",
+        "surface-tint": "#ffb59a",
+        "surface-container-low": "#1f1b17",
+        "on-tertiary-fixed": "#291802",
+        "on-secondary-container": "#c3b7a1",
+        "on-secondary": "#373020",
+        "on-tertiary-container": "#39260d",
+        "outline": "#a98a7f",
+        "on-primary-container": "#4f1700",
+        "on-primary-fixed-variant": "#802a00",
+        "outline-variant": "#594138",
+        "on-secondary-fixed-variant": "#4e4635",
+        "inverse-on-surface": "#352f2b",
+        "error": "#ffb4ab",
+        "primary-fixed-dim": "#ffb59a",
+        "on-primary": "#5a1b00",
+        "surface": "#17130f",
+        "secondary-fixed": "#eee1c9",
+        "primary-container": "#f36323",
+        "surface-variant": "#393430",
+        "secondary-fixed-dim": "#d1c5ae",
+        "tertiary-fixed-dim": "#e2c19d",
+        "inverse-primary": "#a83900",
+        "tertiary": "#e2c19d",
+        "surface-container": "#241f1b",
+        "on-surface-variant": "#e2bfb3",
+        "surface-container-lowest": "#110d0a",
+        "error-container": "#93000a",
+        "on-primary-fixed": "#380d00",
+        "tertiary-fixed": "#ffddb8",
+        "on-tertiary-fixed-variant": "#594327",
+        "surface-container-high": "#2e2925",
+        "primary": "#ffb59a",
+        "surface-container-highest": "#393430",
+        "background": "#17130f",
+        "inverse-surface": "#ebe0da",
+        "secondary-container": "#504837",
+        "on-background": "#ebe0da",
+        "on-secondary-fixed": "#211b0c",
+        "on-surface": "#ebe0da",
+        "primary-fixed": "#ffdbce",
+        "surface-dim": "#17130f"
+      },
+      fontFamily: {
+        headline: ["Bebas Neue", "sans-serif"],
+        title: ["Barlow Condensed", "sans-serif"],
+        body: ["Barlow", "sans-serif"]
+      }
+    }
+  },
+  plugins: [],
+}
