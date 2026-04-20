@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import RaceCategories from '../components/RaceCategories'
 import RouteMap from '../components/RouteMap'
+import WhyAttend from '../components/WhyAttend'
 import Footer from '../components/Footer'
 import About from '../components/About'
 const raceCategories = [
@@ -26,38 +27,7 @@ const raceCategories = [
   },
 ]
 
-const whyAttend = [
-  {
-    number: '01',
-    title: 'HISTORIC ROUTE',
-    description: 'Run through UNESCO heritage sites and centuries-old fortresses.',
-  },
-  {
-    number: '02',
-    title: 'ELITE LOGISTICS',
-    description: 'World-class safety and aid stations every 4KM with medical support.',
-  },
-  {
-    number: '03',
-    title: 'DESERT ENDURANCE',
-    description: 'Test your limits against the unique heat and sand of Rajasthan.',
-  },
-  {
-    number: '04',
-    title: 'COMMUNITY VIBE',
-    description: 'Join a global tribe of ultra-runners and adventure seekers.',
-  },
-  {
-    number: '05',
-    title: 'FINISHER GLORY',
-    description: 'Custom sand-blasted metal medals and local heritage kits.',
-  },
-  {
-    number: '06',
-    title: 'CULTURAL GALA',
-    description: 'Post-race desert celebration with traditional Rajasthani food.',
-  },
-]
+
 
 const testimonials = [
   {
@@ -365,10 +335,17 @@ export default function Home() {
       <main id="top">
         <section className="relative overflow-hidden text-center">
           <div className="relative z-[-4]">
+            {/* Desktop Hero Image */}
             <img
               src="/hero2.webp"
-              alt="Jaipur Ultra illustrated hero backdrop"
-              className="h-auto w-full"
+              alt="Jaipur Ultra desktop backdrop"
+              className="hidden h-auto w-full md:block"
+            />
+            {/* Mobile Hero Image */}
+            <img
+              src="/hero3.png"
+              alt="Jaipur Ultra mobile backdrop"
+              className="block h-auto w-full md:hidden"
             />
           </div>
           <div
@@ -461,9 +438,7 @@ export default function Home() {
               <div className={`rounded-full px-5 py-2 font-title text-sm font-semibold tracking-[0.24em] backdrop-blur-md md:text-base ${isLightMode ? 'border border-white/50 bg-white/42 text-[#3b2417]' : 'border border-white/18 bg-black/8 text-white'}`}>
                 25K CHALLENGE
               </div>
-              <div className={`rounded-full px-5 py-2 font-title text-sm font-semibold tracking-[0.24em] backdrop-blur-md md:text-base ${isLightMode ? 'border border-white/50 bg-white/42 text-[#3b2417]' : 'border border-white/18 bg-black/8 text-white'}`}>
-                SUNRISE START
-              </div>
+             
             </div>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -518,45 +493,31 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-surface py-24">
-          <div className="mx-auto max-w-7xl px-6 md:px-8">
-            <div className="grid grid-cols-1 gap-px border border-outline-variant/20 bg-outline-variant/20 md:grid-cols-3">
-              {whyAttend.map((item) => (
-                <article key={item.number} className="group space-y-6 rounded-2xl bg-background p-10 transition-all duration-300 hover:bg-surface-container-low md:p-12">
-                  <div className={`font-headline text-5xl text-outline opacity-20 transition-all duration-500 ${isLightMode ? 'group-hover:text-[#df8127] group-hover:opacity-100 group-hover:[-webkit-text-stroke-color:#df8127]' : 'group-hover:text-white group-hover:opacity-100 group-hover:[-webkit-text-stroke-color:white]'}`}>
-                    {item.number}
-                  </div>
-                  <h3 className="font-headline text-3xl uppercase">{item.title}</h3>
-                  <p className="leading-relaxed text-on-surface-variant">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <WhyAttend isLightMode={isLightMode} />
 
         <section
-          className={`overflow-hidden px-6 py-24 md:px-8 ${isLightMode ? 'bg-[linear-gradient(180deg,#fff8f2_0%,#f8e8d8_100%)]' : 'bg-[#121117]'}`}
+          className={`overflow-hidden px-6 py-24 md:px-8 ${isLightMode ? 'bg-background' : 'bg-surface'}`}
         >
           <div className="mx-auto max-w-7xl">
             <div
               className={`relative overflow-hidden rounded-[2rem] px-6 py-16 md:px-10 lg:px-14 ${
                 isLightMode
-                  ? 'bg-[radial-gradient(circle_at_top,rgba(224,148,92,0.12),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(214,125,74,0.1),transparent_24%),linear-gradient(180deg,#fffdf9_0%,#f8ebde_100%)] shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
-                  : 'bg-[radial-gradient(circle_at_top,rgba(70,103,126,0.22),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(49,81,102,0.18),transparent_28%),linear-gradient(180deg,#18161d_0%,#100f14_100%)] shadow-[0_30px_120px_rgba(0,0,0,0.45)]'
+                  ? 'bg-surface shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
+                  : 'bg-surface-container shadow-[0_30px_120px_rgba(0,0,0,0.45)] border border-white/5'
               }`}
             >
               <div
                 className={`pointer-events-none absolute inset-y-0 left-0 w-20 md:w-32 ${
                   isLightMode
-                    ? 'bg-gradient-to-r from-[#fbf1e7] via-[#fbf1e7]/88 to-transparent'
-                    : 'bg-gradient-to-r from-[#151219] via-[#151219]/88 to-transparent'
+                    ? 'bg-gradient-to-r from-surface via-surface/80 to-transparent'
+                    : 'bg-gradient-to-r from-surface-container via-surface-container/80 to-transparent'
                 }`}
               />
               <div
                 className={`pointer-events-none absolute inset-y-0 right-0 w-20 md:w-32 ${
                   isLightMode
-                    ? 'bg-gradient-to-l from-[#fbf1e7] via-[#fbf1e7]/88 to-transparent'
-                    : 'bg-gradient-to-l from-[#151219] via-[#151219]/88 to-transparent'
+                    ? 'bg-gradient-to-l from-surface via-surface/80 to-transparent'
+                    : 'bg-gradient-to-l from-surface-container via-surface-container/80 to-transparent'
                 }`}
               />
               <div className="mx-auto max-w-3xl text-center">
@@ -584,8 +545,8 @@ export default function Home() {
                     key={`${item.name}-${activeTestimonial}-${index}`}
                     className={`rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-500 ${
                       isLightMode
-                        ? 'border border-[#e7cdbb] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,236,224,0.98))] shadow-[0_16px_40px_rgba(137,90,59,0.12)]'
-                        : 'border border-outline-variant/30 bg-[linear-gradient(180deg,rgba(36,31,27,0.94),rgba(23,19,15,0.98))] shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
+                        ? 'border border-[#e7cdbb] bg-gradient-to-b from-white/95 to-surface-container-low/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
+                        : 'border border-outline-variant/30 bg-gradient-to-b from-surface-container-high/95 to-surface-container/90 shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
                     } ${index === 1 ? 'lg:translate-y-2 lg:scale-[1.02]' : 'lg:translate-y-8 lg:opacity-90'}`}
                   >
                     <p

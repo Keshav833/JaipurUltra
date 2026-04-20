@@ -1,7 +1,12 @@
 export default function Footer({ isLightMode }) {
   return (
-    <footer className={`border-t-2 border-[#f36323] transition-colors duration-300 ${isLightMode ? 'bg-[#fff9f4] text-[#2f1c12]' : 'bg-[#110d0a] text-[#ebe0da]'}`}>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-8 py-16 w-full max-w-[1440px] mx-auto">
+    <footer className={`relative overflow-hidden border-t-2 border-[#f36323] transition-colors duration-300 ${isLightMode ? 'bg-[#fff9f4] text-[#2f1c12]' : 'bg-[#110d0a] text-[#ebe0da]'}`}>
+      {/* Footer Background Image */}
+      <div className={`absolute inset-0 pointer-events-none opacity-[0.12] ${isLightMode ? 'grayscale brightness-150' : 'grayscale invert brightness-[2.5]'}`}>
+        <img src="/foot.png" alt="" className="w-full h-full object-cover object-center" />
+      </div>
+
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 px-8 py-32 w-full max-w-[1440px] mx-auto">
         <div className="space-y-6">
           <a href="#top" className="flex items-center gap-3 shrink-0 group mb-6">
             <img src="/JU_Logo.png" alt="Jaipur Ultra logo" className="h-14 w-auto drop-shadow-[0_4px_20px_rgba(35,15,8,0.2)]" />
