@@ -40,6 +40,38 @@
   --font-title: "Barlow Condensed", sans-serif;
   --font-body: "Barlow", sans-serif;
   --font-display: "Protest Revolution", serif;
+  @keyframes revealFromPoint {
+    0%   { transform: translateZ(100px) rotateZ(0deg) scale(0);    opacity: 0; }
+    60%  { transform: translateZ(100px)  rotateZ(0deg) scale(1.08); opacity: 1; }
+    100% { transform: translateZ(100px)  rotateZ(0deg) scale(1);    opacity: 1; }
+  }
+
+  @keyframes spinZ {
+    0%   { transform: translateZ(100px) rotateZ(0deg)   scale(1); opacity: 1; }
+    100% { transform: translateZ(100px) rotateZ(360deg) scale(1); opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes rotate3d {
+    0% { transform: translate(-50%, -50%) rotateX(55deg) rotateY(0deg) rotateZ(0deg) scale(1.05); }
+    50% { transform: translate(-50%, -50%) rotateX(55deg) rotateY(180deg) rotateZ(10deg) scale(1.15); }
+    100% { transform: translate(-50%, -50%) rotateX(55deg) rotateY(360deg) rotateZ(0deg) scale(1.05); }
+  }
+
+  @keyframes fadeInRevealLeft {
+    0% { transform: translateX(-30px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  --animate-reveal-from-point: revealFromPoint 1.2s cubic-bezier(.2, 1.4, .4, 1) forwards;
+  --animate-spin-z: spinZ 18s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-rotate-3d: rotate3d 20s linear infinite;
+  --animate-fade-in-left: fadeInRevealLeft 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @layer base {
@@ -104,6 +136,35 @@
   }
 }
 
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .map-wrap-base {
+    transform: translateZ(100px) rotateX(65deg) rotateZ(0deg) scale(0);
+    transform-style: preserve-3d;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .map-wrap-base img {
+    filter: drop-shadow(0 40px 30px rgba(0, 0, 0, 0.5));
+  }
+
+  .map-reveal {
+    @apply animate-reveal-from-point pointer-events-auto;
+  }
+
+  .map-spin {
+    @apply animate-spin-z;
+  }
+}
+
 @layer components {
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -119,12 +180,9 @@
     text-shadow: 0 6px 24px rgba(53, 20, 7, 0.28);
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }

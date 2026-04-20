@@ -1,4 +1,18 @@
+import { useState, useEffect } from "react";
+import m1 from "/m1.webp";
+import m2 from "/m2.webp";
+
 export default function RouteMap() {
+  const [currentMap, setCurrentMap] = useState(0);
+  const maps = [m1, m2];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentMap((prev) => (prev === 0 ? 1 : 0));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="bg-surface-container-low py-24">
       <div className="max-w-[1440px] mx-auto px-8 grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
@@ -19,13 +33,30 @@ export default function RouteMap() {
           </div>
         </div>
         
-        <div className="lg:col-span-2 relative h-[500px] bg-background">
-          <img 
-            alt="Route Map" 
-            className="w-full h-full object-cover opacity-60 grayscale" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDagZLaPZnRwo_Qp4ojERSxOmDzqxC_XGbP_ayThSxae53Z0iE8XjxIBk29a5OSGqlZhwaLFtKWoQBvrl-X6MQHQUVRCugRwESWUEYFBCDaV0cSjTS7CcjFsB1sMOMhs72rvVw2lf6NmcUp2QTRTCqwmwWaTkYAQdUCddMayKbAUpNbrZlWn6weZ91ODJuWVMOQX7ShGgon5ctMvekWK_ATnDgS-j5qOtbVoQ0ShY9BrKI7Ym87cHjOPTfr17xDsfNOJQZivycO0hgm" 
-          />
-          <div className="absolute inset-0 ring-1 ring-inset ring-outline-variant/20"></div>
+        <div className="lg:col-span-2 relative h-[500px] rounded-3xl bg-background overflow-hidden border border-outline-variant/20">
+          {maps.map((map, index) => (
+            <img 
+              key={index}
+              alt={`Route Map ${index + 1}`} 
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                currentMap === index ? "opacity-60" : "opacity-0"
+              } brightness-90`} 
+              src={map} 
+            />
+          ))}
+          <div className="absolute inset-0 ring-1 ring-inset ring-outline-variant/20 pointer-events-none"></div>
+          
+          {/* Progress Indicator */}
+          <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+            {maps.map((_, index) => (
+              <div 
+                key={index}
+                className={`h-1 transition-all duration-300 ${
+                  currentMap === index ? "w-8 bg-primary-container" : "w-4 bg-outline-variant/30"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,3 +1,72 @@
+import { useState, useEffect } from "react";
+import map1 from "/map1.webp";
+
+function RaceCard({ category }) {
+  const [isRevealed, setIsRevealed] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (isRevealed) {
+      timer = setTimeout(() => {
+        setIsSpinning(true);
+      }, 1250);
+    } else {
+      setIsSpinning(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isRevealed]);
+
+  return (
+    <div 
+      className="group relative bg-surface-container-low p-12 border-l-4 border-transparent hover:border-primary-container transition-all duration-500 preserve-3d"
+      onMouseEnter={() => setIsRevealed(true)}
+      onMouseLeave={() => setIsRevealed(false)}
+    >
+      <div className="relative z-10 space-y-10">
+        <h3 className="font-headline text-5xl uppercase tracking-wide">{category.title}</h3>
+        <table className="w-full font-title text-left uppercase">
+          <tbody>
+            <tr className="border-b border-outline-variant/10">
+              <td className="py-4 text-secondary">Distance</td>
+              <td className="py-4 text-right text-on-surface">{category.distance}</td>
+            </tr>
+            <tr className="border-b border-outline-variant/10">
+              <td className="py-4 text-secondary">Cut-off</td>
+              <td className="py-4 text-right text-on-surface">{category.cutoff}</td>
+            </tr>
+            <tr className="border-b border-outline-variant/10">
+              <td className="py-4 text-secondary">Surface</td>
+              <td className="py-4 text-right text-on-surface">{category.surface}</td>
+            </tr>
+            <tr>
+              <td className="py-4 text-secondary">Aid Stations</td>
+              <td className="py-4 text-right text-on-surface">{category.aidStations}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button className="w-full bg-surface-container-highest py-4 font-title tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary-container transition-colors">
+          SELECT CHALLENGE
+        </button>
+      </div>
+
+    <div className="absolute inset-0 z-50 pointer-events-none flex items-center justify-center p-8 overflow-visible preserve-3d">
+  <div className={`map-wrap-base w-[340px]  h-[340px] ${isRevealed ? 'map-reveal' : ''} ${isSpinning ? 'map-spin' : ''}`}>
+    <img 
+      src={map1} 
+      alt="Route Map" 
+      className="w-full h-full object-contain"
+    />
+  </div>
+</div>
+
+      <div className="absolute -right-8 -top-8 font-headline text-[200px] leading-none text-on-surface/5 select-none">
+        {category.number}
+      </div>
+    </div>
+  );
+}
+
 export default function RaceCategories() {
   const categories = [
     {
@@ -19,7 +88,7 @@ export default function RaceCategories() {
   ];
 
   return (
-    <section className="py-24 px-8 max-w-[1440px] mx-auto">
+    <section className="py-24 px-8 max-w-[1440px] mx-auto perspective-1000">
       <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
         <h2 className="font-headline text-8xl uppercase leading-[0.8]">
           CHOOSE YOUR<br />
@@ -30,40 +99,7 @@ export default function RaceCategories() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {categories.map((category, index) => (
-          <div 
-            key={index}
-            className="group relative bg-surface-container-low p-12 border-l-4 border-transparent hover:border-primary-container transition-all duration-500 overflow-hidden"
-          >
-            <div className="absolute -right-8 -top-8 font-headline text-[200px] leading-none text-on-surface/5 select-none">
-              {category.number}
-            </div>
-            <div className="relative z-10 space-y-10">
-              <h3 className="font-headline text-5xl uppercase tracking-wide">{category.title}</h3>
-              <table className="w-full font-title text-left uppercase">
-                <tbody>
-                  <tr className="border-b border-outline-variant/10">
-                    <td className="py-4 text-secondary">Distance</td>
-                    <td className="py-4 text-right text-on-surface">{category.distance}</td>
-                  </tr>
-                  <tr className="border-b border-outline-variant/10">
-                    <td className="py-4 text-secondary">Cut-off</td>
-                    <td className="py-4 text-right text-on-surface">{category.cutoff}</td>
-                  </tr>
-                  <tr className="border-b border-outline-variant/10">
-                    <td className="py-4 text-secondary">Surface</td>
-                    <td className="py-4 text-right text-on-surface">{category.surface}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-4 text-secondary">Aid Stations</td>
-                    <td className="py-4 text-right text-on-surface">{category.aidStations}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <button className="w-full bg-surface-container-highest py-4 font-title tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary-container transition-colors">
-                SELECT CHALLENGE
-              </button>
-            </div>
-          </div>
+          <RaceCard key={index} category={category} />
         ))}
       </div>
     </section>

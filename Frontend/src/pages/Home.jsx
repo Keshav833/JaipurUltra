@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-
+import RaceCategories from '../components/RaceCategories'
+import RouteMap from '../components/RouteMap'
+import Footer from '../components/Footer'
+import About from '../components/About'
 const raceCategories = [
   {
     distance: '50',
@@ -226,7 +229,7 @@ function FAQItem({ faq, isOpen, onToggle, isLightMode }) {
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-6 py-8 text-left transition-all"
+        className="flex w-full items-center justify-between gap-6 py-4 text-left transition-all"
       >
         <div className="relative flex-1 overflow-hidden">
           <span className={`block font-title text-2xl uppercase tracking-[0.05em] transition-all duration-500 md:text-3xl ${isOpen ? 'translate-x-4 text-primary-container' : (isLightMode ? 'text-[#2f1c12]' : 'text-white')}`}>
@@ -245,7 +248,7 @@ function FAQItem({ faq, isOpen, onToggle, isLightMode }) {
 
       <div className={`grid transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <div className="pb-12 pr-12 md:pl-20">
+          <div className="pb-4 pr-12 md:pl-20">
             <p className={`whitespace-pre-line text-lg leading-relaxed md:text-xl lg:max-w-4xl ${isLightMode ? 'text-[#5a321d]' : 'text-on-surface-variant'}`}>
               {faq.answer}
             </p>
@@ -363,7 +366,7 @@ export default function Home() {
         <section className="relative overflow-hidden text-center">
           <div className="relative z-[-4]">
             <img
-              src="/hero2.png"
+              src="/hero2.webp"
               alt="Jaipur Ultra illustrated hero backdrop"
               className="h-auto w-full"
             />
@@ -438,10 +441,13 @@ export default function Home() {
               <div className="font-title text-sm font-semibold tracking-[0.35em] text-[#fff0eb] md:text-base">
                 JAIPUR, RAJASTHAN
               </div>
-              <h1 className="hero-poster-title text-[12vw] leading-[0.98] text-white md:text-[8.2vw] lg:text-[5.1rem]">
-                Conquer the Road
-                <br />
-                Own the Distance
+              <h1 className="hero-poster-title text-[11vw] leading-[0.98] text-white md:text-[8.2vw] lg:text-[5.1rem]">
+                <span className="md:hidden">CONQUER THE ROAD</span>
+                <span className="hidden md:inline">
+                  Conquer the Road
+                  <br />
+                  Own the Distance
+                </span>
               </h1>
               <p className="mx-auto max-w-xl text-sm leading-relaxed text-[#fff1e6] drop-shadow-[0_3px_12px_rgba(50,22,12,0.24)] md:text-base">
                 From the shores of Jal Mahal into the heart of Rajasthan, Jaipur Ultra delivers a sunrise run through heritage walls, open roads, and long-distance grit.
@@ -486,125 +492,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2">
-          <div className="flex flex-col justify-center space-y-10 border-r-0 border-outline-variant/20 px-6 py-20 md:border-r md:px-12 lg:px-24">
-            <div className="font-headline text-4xl text-outline opacity-30">#01</div>
-            <h2 className="font-headline text-5xl uppercase leading-tight md:text-7xl">
-              NOT JUST A RACE.
-              <br />
-              <span className="text-primary-container">A CULTURAL RELAY.</span>
-            </h2>
-            <div className="max-w-lg space-y-6 text-lg leading-relaxed text-on-surface-variant">
-              <p>
-                Experience Rajasthan like never before. The Jaipur Ultra takes you from the misty shores of Jal Mahal, through the historic Pink City gates, and out into the raw grit of the Aravalli foothills.
-              </p>
-              <p>
-                This is not about personal bests alone. It is endurance in its purest form, crossing ancient fort paths and sandy riverbeds under the desert sun.
-              </p>
-            </div>
-            <div>
-              <a href="#route" className="group flex items-center gap-4 font-title tracking-widest text-primary">
-                <span className="h-[2px] w-12 bg-primary-container transition-all group-hover:w-16" />
-                LEARN THE HERITAGE
-              </a>
-            </div>
-          </div>
-          <div className="relative h-[420px] overflow-hidden bg-surface-container md:h-auto md:min-h-[720px]">
-            <img
-              alt="Runner at dawn on a dusty trail with Jaipur architecture in the background"
-              className="h-full w-full object-cover grayscale brightness-50"
-              src="https://images.unsplash.com/photo-1483721310020-03333e577078?auto=format&fit=crop&w=1400&q=80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80" />
-          </div>
-        </section>
+        <About />
 
-        <section id="categories" className="mx-auto max-w-[1440px] px-6 py-24 md:px-8">
-          <div className="mb-16 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <h2 className="font-headline text-6xl uppercase leading-[0.82] md:text-8xl">
-              CHOOSE YOUR
-              <br />
-              <span className="text-primary-container">BATTLE</span>
-            </h2>
-            <div className="mb-4 font-title tracking-[0.2em] text-secondary">PICK YOUR DISTANCE</div>
-          </div>
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-            {raceCategories.map((category) => (
-              <article
-                key={category.title}
-                className="group relative overflow-hidden rounded-3xl border-l-4 border-transparent bg-surface-container-low p-8 transition-all duration-500 hover:border-primary-container md:p-12"
-              >
-                <div className="pointer-events-none absolute -right-8 -top-8 select-none font-headline text-[160px] leading-none text-on-surface/5 md:text-[200px]">
-                  {category.distance}
-                </div>
-                <div className="relative z-10 space-y-10">
-                  <h3 className="font-headline text-4xl uppercase tracking-wide md:text-5xl">
-                    {category.title}
-                  </h3>
-                  <table className="w-full font-title text-left uppercase">
-                    <tbody>
-                      {category.stats.map(([label, value], index) => (
-                        <tr
-                          key={label}
-                          className={index < category.stats.length - 1 ? 'border-b border-outline-variant/10' : ''}
-                        >
-                          <td className="py-4 text-secondary">{label}</td>
-                          <td className="py-4 text-right text-on-surface">{value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <button className="w-full bg-surface-container-highest py-4 font-title uppercase tracking-[0.2em] transition-colors hover:bg-primary-container hover:text-on-primary-container">
-                    SELECT CHALLENGE
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+        <RaceCategories />
 
-        <section id="route" className="bg-surface-container-low py-24">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-16 px-6 lg:grid-cols-3">
-            <div className="space-y-8 lg:col-span-1">
-              <h2 className="font-headline text-5xl uppercase leading-tight md:text-6xl">
-                YOUR ROAD THROUGH
-                <br />
-                <span className="text-primary-container">RAJASTHAN</span>
-              </h2>
-              <div className="grid gap-6">
-                <div className="flex flex-col gap-2 bg-surface-container-highest p-6">
-                  <span className="font-title text-xs tracking-widest text-secondary">START POINT</span>
-                  <span className="font-headline text-2xl">JAL MAHAL PALACE</span>
-                </div>
-                <div className="flex flex-col gap-2 bg-surface-container-highest p-6">
-                  <span className="font-title text-xs tracking-widest text-secondary">SURFACE TYPE</span>
-                  <span className="font-headline text-2xl">COBBLESTONE &amp; SAND</span>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[500px] overflow-hidden rounded-3xl bg-background lg:col-span-2">
-              <img
-                alt="Graphic route map of Jaipur with a highlighted ultra marathon path"
-                className="h-full w-full object-cover opacity-60 grayscale"
-                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1400&q=80"
-              />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(243,99,35,0.28),transparent_24%),linear-gradient(180deg,rgba(23,19,15,0.18),rgba(23,19,15,0.76))]" />
-              <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <path
-                  d="M12 72 C24 64, 26 35, 41 39 S60 70, 72 55 S84 27, 91 32"
-                  fill="none"
-                  stroke="#f36323"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeDasharray="2.5 2.5"
-                />
-                <circle cx="12" cy="72" r="2" fill="#f36323" />
-                <circle cx="91" cy="32" r="2" fill="#ffdbce" />
-              </svg>
-              <div className="absolute inset-0 ring-1 ring-inset ring-outline-variant/20" />
-            </div>
-          </div>
-        </section>
+        <RouteMap />
 
         <section id="gallery" className="py-24">
           <div className="mx-auto mb-16 max-w-[1440px] px-6 md:px-8">
@@ -682,9 +574,7 @@ export default function Home() {
                     isLightMode ? 'text-[#2f1c12]' : 'text-white'
                   }`}
                 >
-                  Don&apos;t take our word for it.
-                  <br />
-                  Over 100+ people trust us.
+                  The Desert Remembers Every Runner
                 </h2>
               </div>
 
@@ -695,7 +585,7 @@ export default function Home() {
                     className={`rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-500 ${
                       isLightMode
                         ? 'border border-[#e7cdbb] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,236,224,0.98))] shadow-[0_16px_40px_rgba(137,90,59,0.12)]'
-                        : 'border border-[#3d5b66]/40 bg-[linear-gradient(180deg,rgba(30,39,48,0.9),rgba(20,25,31,0.96))] shadow-[0_16px_40px_rgba(0,0,0,0.28)]'
+                        : 'border border-outline-variant/30 bg-[linear-gradient(180deg,rgba(36,31,27,0.94),rgba(23,19,15,0.98))] shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
                     } ${index === 1 ? 'lg:translate-y-2 lg:scale-[1.02]' : 'lg:translate-y-8 lg:opacity-90'}`}
                   >
                     <p
@@ -731,7 +621,7 @@ export default function Home() {
                         className={`inline-flex rounded-full px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
                           isLightMode
                             ? 'border border-[#ebc9a8] bg-[#fff2e5] text-[#d97a24]'
-                            : 'border border-[#4d6b78]/45 bg-[#1c2a31]/85 text-[#5fd4f6]'
+                            : 'border border-primary-container/30 bg-primary-container/10 text-primary-container'
                         }`}
                       >
                         <span className="text-sm tracking-[0.22em]">★★★★★</span>
@@ -752,7 +642,7 @@ export default function Home() {
                       className={`absolute left-1/2 top-0 w-[34rem] max-w-[calc(100%-3rem)] rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isLightMode
                           ? 'border border-[#e7cdbb] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,236,224,0.98))] shadow-[0_16px_40px_rgba(137,90,59,0.12)]'
-                          : 'border border-[#3d5b66]/40 bg-[linear-gradient(180deg,rgba(30,39,48,0.9),rgba(20,25,31,0.96))] shadow-[0_16px_40px_rgba(0,0,0,0.28)]'
+                          : 'border border-outline-variant/30 bg-[linear-gradient(180deg,rgba(36,31,27,0.94),rgba(23,19,15,0.98))] shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
                       }`}
                       style={{
                         transform:
@@ -800,7 +690,7 @@ export default function Home() {
                           className={`inline-flex rounded-full px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
                             isLightMode
                               ? 'border border-[#ebc9a8] bg-[#fff2e5] text-[#d97a24]'
-                              : 'border border-[#4d6b78]/45 bg-[#1c2a31]/85 text-[#5fd4f6]'
+                              : 'border border-primary-container/30 bg-primary-container/10 text-primary-container'
                           }`}
                         >
                           <span className="text-sm tracking-[0.22em]">★★★★★</span>
@@ -836,10 +726,10 @@ export default function Home() {
                         index === activeTestimonial
                           ? isLightMode
                             ? 'w-8 bg-[#df8127]'
-                            : 'w-8 bg-[#5fd4f6]'
+                            : 'w-8 bg-primary-container'
                           : isLightMode
                             ? 'w-2.5 bg-[#d8b39f]'
-                            : 'w-2.5 bg-white/20'
+                            : 'w-2.5 bg-outline-variant/40'
                       }`}
                       aria-label={`Go to testimonial ${index + 1}`}
                     />
@@ -853,7 +743,7 @@ export default function Home() {
                   className={`inline-flex h-12 w-12 items-center justify-center rounded-full transition-all ${
                     isLightMode
                       ? 'border border-[#ebc9a8] bg-[#fff2e5] text-[#d97a24] hover:bg-[#ffe8d3]'
-                      : 'border border-[#4d6b78]/55 bg-[#18252d] text-[#5fd4f6] hover:bg-[#1f3039]'
+                      : 'border border-primary-container/40 bg-primary-container/10 text-primary-container hover:bg-primary-container/20'
                   }`}
                   aria-label="Next testimonial"
                 >
@@ -864,8 +754,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="faq" className="mx-auto w-full max-w-[1440px] px-6 py-32 md:px-12">
-          <div className="mb-20 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
+        <section id="faq" className="mx-auto w-full max-w-[1440px] px-6 py-24 md:px-12">
+          <div className="mb-12 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
             <h2 className="font-headline text-6xl uppercase leading-none md:text-8xl">
               COMMON <span className="text-primary-container">QUESTIONS</span>
             </h2>
@@ -885,63 +775,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer id="footer" className="border-t-2 border-primary-container bg-surface-container-lowest">
-        <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-6 py-16 md:grid-cols-3 md:px-8">
-          <div className="space-y-6">
-            <img src="/JU_Logo.png" alt="Jaipur Ultra logo" className="h-20 w-auto" />
-            <p className="max-w-xs font-title text-sm uppercase tracking-widest text-secondary">
-              THE ULTIMATE DESERT MARATHON IN THE HEART OF THE PINK CITY. EXPERIENCE THE GRIT.
-            </p>
-            <div className="flex gap-4">
-              <span className="material-symbols-outlined cursor-pointer text-primary-container transition-transform hover:scale-110">
-                public
-              </span>
-              <span className="material-symbols-outlined cursor-pointer text-primary-container transition-transform hover:scale-110">
-                share
-              </span>
-              <span className="material-symbols-outlined cursor-pointer text-primary-container transition-transform hover:scale-110">
-                mail
-              </span>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div className="flex flex-col gap-4 font-title text-sm uppercase tracking-widest">
-              <span className="mb-2 text-primary-container">QUICK LINKS</span>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#top">
-                Home
-              </a>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#categories">
-                Race Info
-              </a>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#gallery">
-                Volunteer
-              </a>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#footer">
-                Sponsorship
-              </a>
-            </div>
-            <div className="flex flex-col gap-4 font-title text-sm uppercase tracking-widest">
-              <span className="mb-2 text-primary-container">LEGAL</span>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#footer">
-                Privacy Policy
-              </a>
-              <a className="text-secondary transition-all hover:text-primary-container" href="#footer">
-                Terms of Service
-              </a>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between md:items-end">
-            <div className="text-left md:text-right">
-              <span className="font-title text-sm uppercase tracking-[0.2em] text-secondary">
-                Made with grit in Jaipur
-              </span>
-            </div>
-            <div className="mt-8 text-left font-title text-xs uppercase tracking-widest text-secondary/50 md:text-right">
-              &copy; 2026 JAIPUR ULTRA MARATHON. ALL RIGHTS RESERVED.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer isLightMode={isLightMode} />
 
       <div className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-4 lg:flex">
         <div className="relative h-32 w-px bg-outline-variant/30">
