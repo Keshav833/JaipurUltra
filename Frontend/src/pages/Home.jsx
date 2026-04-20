@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import RaceCategories from '../components/RaceCategories'
 import RouteMap from '../components/RouteMap'
 import WhyAttend from '../components/WhyAttend'
@@ -153,7 +153,7 @@ const galleryImages = [
 
 function CountdownTimer() {
   const targetTime = useMemo(() => new Date('2026-11-01T05:00:00+05:30').getTime(), [])
-  const [timeLeft, setTimeLeft] = useState(targetTime - Date.now())
+  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, targetTime - Date.now()))
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -241,6 +241,58 @@ function getTestimonialOffset(index, activeIndex, total) {
   }
 
   return offset
+}
+
+function GalleryItem({ image, isLightMode }) {
+  const [isActive, setIsActive] = useState(false)
+  const itemRef = useRef(null)
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768
+    if (!isMobile) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsActive(entry.isIntersecting)
+      },
+      {
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: 0,
+      }
+    )
+
+    if (itemRef.current) {
+      observer.observe(itemRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={itemRef}
+      className={`group relative overflow-hidden rounded-2xl border-2 transition-all duration-500 ${
+        image.className
+      } ${
+        isLightMode
+          ? 'border-[#ebc9a8] shadow-[0_8px_20px_rgba(137,90,59,0.06)]'
+          : 'border-outline-variant/30 shadow-[0_10px_30px_rgba(0,0,0,0.4)]'
+      }`}
+    >
+      <img
+        alt={image.alt}
+        className={`h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.05] ${
+          isActive ? 'grayscale-0' : 'grayscale md:group-hover:grayscale-0'
+        }`}
+        src={image.src}
+      />
+      <div
+        className={`absolute inset-0 transition-all duration-700 ${
+          isActive ? 'bg-background/0' : 'bg-background/40 md:group-hover:bg-background/0'
+        }`}
+      />
+    </div>
+  )
 }
 
 export default function Home() {
@@ -450,7 +502,7 @@ export default function Home() {
               </a>
               <a
                 href="#route"
-                className={`rounded-full px-8 py-3 text-center font-title text-lg font-bold tracking-wide backdrop-blur-sm transition-all md:px-10 md:py-4 md:text-xl ${isLightMode ? 'border border-white/55 bg-white/36 text-[#40261a] hover:bg-white/48' : 'border border-white/30 bg-white/10 text-white hover:bg-white/18'}`}
+                className={`hidden rounded-full px-8 py-3 text-center font-title text-lg font-bold tracking-wide backdrop-blur-sm transition-all md:inline-flex md:px-10 md:py-4 md:text-xl ${isLightMode ? 'border border-white/55 bg-white/36 text-[#40261a] hover:bg-white/48' : 'border border-white/30 bg-white/10 text-white hover:bg-white/18'}`}
               >
                 Explore Route
               </a>
@@ -467,7 +519,7 @@ export default function Home() {
           </div>
         </section>
 
-        <About />
+        <About isLightMode={isLightMode} />
 
         <RaceCategories />
 
@@ -481,14 +533,7 @@ export default function Home() {
           </div>
           <div className="grid auto-rows-[180px] grid-cols-2 gap-4 px-4 md:auto-rows-[190px] md:grid-cols-4 lg:h-[800px] lg:auto-rows-auto">
             {galleryImages.map((image) => (
-              <div key={image.alt} className={`group relative overflow-hidden rounded-2xl ${image.className}`}>
-                <img
-                  alt={image.alt}
-                  className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0"
-                  src={image.src}
-                />
-                <div className="absolute inset-0 bg-background/40 transition-all duration-500 group-hover:bg-background/0" />
-              </div>
+              <GalleryItem key={image.alt} image={image} isLightMode={isLightMode} />
             ))}
           </div>
         </section>
