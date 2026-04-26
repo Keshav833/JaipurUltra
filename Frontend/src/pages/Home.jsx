@@ -3,6 +3,7 @@ import RaceCategories from '../components/RaceCategories'
 import RouteMap from '../components/RouteMap'
 import WhyAttend from '../components/WhyAttend'
 import Footer from '../components/Footer'
+import MagicBento from '../components/MagicBento'
 import About from '../components/About'
 const raceCategories = [
   {
@@ -94,7 +95,7 @@ const faqs = [
   {
     question: 'What are the basic race rules?',
     answer:
-      '• Follow the marked route at all times — shortcuts will result in disqualification.\n• No littering — carry your waste until the next aid station.\n• Headphones are discouraged for safety reasons.\n• Bib numbers must be worn visibly on the front throughout the race.\n• Support crew is only allowed at designated aid stations.',
+      '• Follow the marked route at all times — shortcuts will result in disqualification.\n• No littering — carry your waste until the next aid station.\n• Bib numbers must be worn visibly on the front throughout the race.\n• Support crew is only allowed at designated aid stations.',
   },
   {
     question: 'How do I reach the Jaipur Ultra start line?',
@@ -308,7 +309,16 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY)
+          ticking = false
+        })
+        ticking = true
+      }
+    }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -336,7 +346,13 @@ export default function Home() {
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-6 md:px-8 lg:px-12">
           <a href="#top" className="flex items-center gap-3 shrink-0 group">
-            <img src="/JU_Logo.png" alt="Jaipur Ultra logo" className="h-14 w-auto drop-shadow-[0_10px_30px_rgba(35,15,8,0.2)] md:h-16 transition-transform group-hover:scale-105" />
+            <img 
+              src="/JU_Logo.png" 
+              alt="Jaipur Ultra logo" 
+              width={64}
+              height={64}
+              className="h-14 w-auto drop-shadow-[0_10px_30px_rgba(35,15,8,0.2)] md:h-16 transition-transform group-hover:scale-105" 
+            />
             <div className="flex flex-col leading-[0.75] transition-transform group-hover:translate-x-1">
               <span className="font-headline text-2xl font-black tracking-tight text-white md:text-3xl">JAIPUR</span>
               <span className="font-headline text-xl font-black tracking-tighter text-[#ff9800] md:text-2xl">ULTRA</span>
@@ -391,12 +407,16 @@ export default function Home() {
             <img
               src="/hero2.webp"
               alt="Jaipur Ultra desktop backdrop"
+              width={1920}
+              height={1080}
               className="hidden h-auto w-full md:block"
             />
             {/* Mobile Hero Image */}
             <img
               src="/hero3.png"
               alt="Jaipur Ultra mobile backdrop"
+              width={500}
+              height={800}
               className="block h-auto w-full md:hidden"
             />
           </div>
@@ -415,46 +435,54 @@ export default function Home() {
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-2]">
             {/* Left Clouds - move left when scrolling */}
             <div 
-              className="absolute top-[8%] left-[8%] w-[18vw]" 
-              style={{ transform: `translateX(-${scrollY * 0.6}px)` }}
+              className="absolute top-[8%] left-[8%] w-[18vw] [will-change:transform]" 
+              style={{ transform: `translateX(-${scrollY * 0.25}px) translateZ(0)` }}
             >
               <img 
                 src="/cloud.png" 
+                width={300}
+                height={150}
                 className="w-full opacity-40 animate-float" 
                 style={{ animationDuration: '7s', animationDelay: '0s' }} 
                 alt=""
               />
             </div>
             <div 
-              className="absolute top-[32%] left-[22%] w-[14vw]" 
-              style={{ transform: `translateX(-${scrollY * 0.3}px)` }}
+              className="absolute top-[32%] left-[22%] w-[14vw] [will-change:transform]" 
+              style={{ transform: `translateX(-${scrollY * 0.15}px) translateZ(0)` }}
             >
               <img 
                 src="/cloud.png" 
+                width={200}
+                height={100}
                 className="w-full opacity-25 animate-float" 
                 style={{ animationDuration: '9s', animationDelay: '0.8s' }} 
                 alt=""
               />
             </div>
-
+ 
             {/* Right Clouds - move right when scrolling */}
             <div 
-              className="absolute top-[12%] right-[12%] w-[22vw]" 
-              style={{ transform: `translateX(${scrollY * 0.7}px)` }}
+              className="absolute top-[12%] right-[12%] w-[22vw] [will-change:transform]" 
+              style={{ transform: `translateX(${scrollY * 0.3}px) translateZ(0)` }}
             >
               <img 
                 src="/cloud.png" 
+                width={400}
+                height={200}
                 className="w-full opacity-30 animate-float" 
                 style={{ animationDuration: '8s', animationDelay: '1.5s' }} 
                 alt=""
               />
             </div>
             <div 
-              className="absolute top-[28%] right-[25%] w-[19vw]" 
-              style={{ transform: `translateX(${scrollY * 0.4}px)` }}
+              className="absolute top-[28%] right-[25%] w-[19vw] [will-change:transform]" 
+              style={{ transform: `translateX(${scrollY * 0.2}px) translateZ(0)` }}
             >
               <img 
                 src="/cloud.png" 
+                width={350}
+                height={175}
                 className="w-full opacity-35 animate-float" 
                 style={{ animationDuration: '7.5s', animationDelay: '2.2s' }} 
                 alt=""
@@ -463,8 +491,8 @@ export default function Home() {
           </div>
 
           <div 
-            className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12"
-            style={{ transform: `translateY(-${scrollY * 0.25}px)`, opacity: Math.max(0, 1 - scrollY / 600) }}
+            className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12 [will-change:transform,opacity]"
+            style={{ transform: `translateY(-${scrollY * 0.25}px) translateZ(0)`, opacity: Math.max(0, 1 - scrollY / 600) }}
           >
             <div className="mt-4 max-w-4xl space-y-4 md:-mt-2">
               <div className="font-title text-sm font-semibold tracking-[0.35em] text-[#fff0eb] md:text-base">
@@ -523,19 +551,24 @@ export default function Home() {
 
         <RaceCategories />
 
-        <RouteMap />
+        <RouteMap isLightMode={isLightMode} />
 
-        <section id="gallery" className="py-24">
+        <section id="gallery" className="py-24 bg-surface-container-lowest">
           <div className="mx-auto mb-16 max-w-[1440px] px-6 md:px-8">
-            <h2 className="font-headline text-5xl uppercase tracking-tighter md:text-6xl">
+            <h2 className="font-headline text-5xl uppercase tracking-tighter md:text-6xl text-center">
               THE GRIT IN <span className="text-primary-container">MOTION</span>
             </h2>
           </div>
-          <div className="grid auto-rows-[180px] grid-cols-2 gap-4 px-4 md:auto-rows-[190px] md:grid-cols-4 lg:h-[800px] lg:auto-rows-auto">
-            {galleryImages.map((image) => (
-              <GalleryItem key={image.alt} image={image} isLightMode={isLightMode} />
-            ))}
-          </div>
+          <MagicBento 
+            images={galleryImages} 
+            enableTilt={false} 
+            enableMagnetism={false}
+            enableSpotlight={false}
+            enableStars={false}
+            particleCount={0}
+            enableBorderGlow={true}
+            // enableSpotlight={false}
+          />
         </section>
 
         <WhyAttend isLightMode={isLightMode} />
@@ -584,22 +617,22 @@ export default function Home() {
                 </h2>
               </div>
 
-              <div className="mt-14 grid grid-cols-1 gap-6 lg:hidden">
-                {visibleTestimonials.map((item, index) => (
+              <div className="mt-14 -mx-6 flex overflow-x-auto px-6 pb-8 snap-x snap-mandatory scrollbar-hide lg:hidden gap-5">
+                {testimonials.map((item, index) => (
                   <article
-                    key={`${item.name}-${activeTestimonial}-${index}`}
-                    className={`rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-500 ${
+                    key={`${item.name}-${index}`}
+                    className={`min-w-[85vw] snap-center rounded-[2.2rem] p-8 backdrop-blur-sm transition-all duration-500 flex flex-col justify-between ${
                       isLightMode
-                        ? 'border border-[#e7cdbb] bg-gradient-to-b from-white/95 to-surface-container-low/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
+                        ? 'border border-[#e7cdbb] bg-gradient-to-b from-white/95 to-[#fff2e5]/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
                         : 'border border-outline-variant/30 bg-gradient-to-b from-surface-container-high/95 to-surface-container/90 shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
-                    } ${index === 1 ? 'lg:translate-y-2 lg:scale-[1.02]' : 'lg:translate-y-8 lg:opacity-90'}`}
+                    }`}
                   >
                     <p
-                      className={`min-h-28 text-lg leading-relaxed ${
+                      className={`min-h-[140px] text-lg leading-relaxed italic ${
                         isLightMode ? 'text-[#53392b]' : 'text-white/88'
                       }`}
                     >
-                      {item.quote}
+                      "{item.quote}"
                     </p>
 
                     <div className="mt-8 flex items-end justify-between gap-4">

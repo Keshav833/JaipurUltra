@@ -19,33 +19,33 @@ function RaceCard({ category }) {
 
   return (
     <div 
-      className="group relative bg-surface-container-low p-12 border-l-4 border-transparent hover:border-primary-container transition-all duration-500 preserve-3d"
+      className="group relative overflow-hidden rounded-3xl border border-outline-variant/25 bg-surface-container-low p-8 sm:p-10 lg:p-12 shadow-[0_18px_50px_rgba(0,0,0,0.2)] transition-all duration-500 hover:border-primary-container/60 hover:shadow-[0_26px_70px_rgba(223,129,39,0.16)]"
       onMouseEnter={() => setIsRevealed(true)}
       onMouseLeave={() => setIsRevealed(false)}
     >
       <div className="relative z-10 space-y-10">
-        <h3 className="font-headline text-5xl uppercase tracking-wide">{category.title}</h3>
+        <h3 className="font-headline text-4xl sm:text-5xl uppercase tracking-wide">{category.title}</h3>
         <table className="w-full font-title text-left uppercase">
           <tbody>
-            <tr className="border-b border-outline-variant/10">
-              <td className="py-4 text-secondary">Distance</td>
-              <td className="py-4 text-right text-on-surface">{category.distance}</td>
+            <tr className="border-b border-outline-variant/15">
+              <td className="py-4 text-secondary tracking-[0.15em] text-xs sm:text-sm">Distance</td>
+              <td className="py-4 text-right text-on-surface tracking-[0.08em]">{category.distance}</td>
             </tr>
-            <tr className="border-b border-outline-variant/10">
-              <td className="py-4 text-secondary">Cut-off</td>
-              <td className="py-4 text-right text-on-surface">{category.cutoff}</td>
+            <tr className="border-b border-outline-variant/15">
+              <td className="py-4 text-secondary tracking-[0.15em] text-xs sm:text-sm">Cut-off</td>
+              <td className="py-4 text-right text-on-surface tracking-[0.08em]">{category.cutoff}</td>
             </tr>
-            <tr className="border-b border-outline-variant/10">
-              <td className="py-4 text-secondary">Surface</td>
-              <td className="py-4 text-right text-on-surface">{category.surface}</td>
+            <tr className="border-b border-outline-variant/15">
+              <td className="py-4 text-secondary tracking-[0.15em] text-xs sm:text-sm">Surface</td>
+              <td className="py-4 text-right text-on-surface tracking-[0.08em]">{category.surface}</td>
             </tr>
             <tr>
-              <td className="py-4 text-secondary">Aid Stations</td>
-              <td className="py-4 text-right text-on-surface">{category.aidStations}</td>
+              <td className="py-4 text-secondary tracking-[0.15em] text-xs sm:text-sm">Aid Stations</td>
+              <td className="py-4 text-right text-on-surface tracking-[0.08em]">{category.aidStations}</td>
             </tr>
           </tbody>
         </table>
-        <button className="w-full bg-surface-container-highest py-4 font-title tracking-[0.2em] uppercase hover:bg-primary-container hover:text-on-primary-container transition-colors">
+        <button className="w-full rounded-xl border border-outline-variant/30 bg-surface-container-highest py-4 font-title text-sm sm:text-base tracking-[0.2em] uppercase transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-container hover:bg-primary-container hover:text-on-primary-container">
           SELECT CHALLENGE
         </button>
       </div>
@@ -88,7 +88,7 @@ export default function RaceCategories() {
   ];
 
   return (
-    <section className="py-24 px-8 max-w-[1440px] mx-auto perspective-1000">
+    <section className="py-24 px-8 max-w-[1440px] mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
         <h2 className="font-headline text-8xl uppercase leading-[0.8]">
           CHOOSE YOUR<br />

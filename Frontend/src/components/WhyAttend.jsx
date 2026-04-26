@@ -29,7 +29,7 @@ export default function WhyAttend({ isLightMode }) {
     {
       number: "02",
       title: "ELITE LOGISTICS",
-      description: "World-class safety and aid stations every 4KM with medical support.",
+      description: "Fully loaded every 6KM with medical support and aid stations every 4KM with medical support.",
       image: img2
     },
     {
@@ -47,20 +47,15 @@ export default function WhyAttend({ isLightMode }) {
     {
       number: "05",
       title: "FINISHER GLORY",
-      description: "Custom sand-blasted metal medals and local heritage kits.",
+      description: "Unique metal medals and  heritage kits.",
       image: img5
     },
-    {
-      number: "06",
-      title: "CULTURAL GALA",
-      description: "Post-race desert celebration with traditional Rajasthani food.",
-      image: img6
-    }
+    
   ];
 
   const renderCard = (reason, index, isStacked = false) => (
     <div 
-      className={`group relative p-8 h-full min-h-[280px] flex flex-col justify-between overflow-hidden rounded-[1.5rem] transition-all duration-500 ${!isStacked ? 'hover:-translate-y-2' : ''} ${isLightMode ? 'bg-white shadow-[0_20px_50px_rgba(122,74,43,0.08)] hover:shadow-[0_40px_80px_rgba(122,74,43,0.15)]' : 'bg-surface-container-low border border-white/5 shadow-2xl hover:bg-surface-container-high'}`}
+      className={`group relative p-8 h-full min-h-[280px] flex flex-col justify-between overflow-hidden rounded-[1.5rem] transition-all duration-500 [will-change:transform] ${isLightMode ? 'bg-white shadow-[0_20px_50px_rgba(122,74,43,0.08)] hover:shadow-[0_40px_80px_rgba(122,74,43,0.15)]' : 'bg-surface-container-low border border-white/5 shadow-2xl hover:bg-surface-container-high'}`}
       style={{ '--bg-image': `url(${reason.image})` }}
     >
       {/* Background Image Layer */}
@@ -93,14 +88,15 @@ export default function WhyAttend({ isLightMode }) {
           </div>
         ) : (
           <ScrollStack 
+            className="why-attend-stack"
             useWindowScroll={true}
-            itemDistance={40}
-            itemStackDistance={25}
-            stackPosition="15%"
-            baseScale={0.9}
+            itemDistance={24}
+            itemStackDistance={16}
+            stackPosition="10%"
+            baseScale={0.96}
           >
             {reasons.map((reason, index) => (
-              <ScrollStackItem key={index}>
+              <ScrollStackItem key={index} itemClassName="why-attend-stack__item">
                 {renderCard(reason, index, true)}
               </ScrollStackItem>
             ))}

@@ -46,3 +46,16 @@
   width: 100%;
   height: 20vh; /* Extra space at bottom */
 }
+
+/* WhyAttend mobile stack tuning */
+@media (max-width: 767px) {
+  .why-attend-stack .scroll-stack-inner {
+    padding: 2vh 0 12vh;
+  }
+
+  .why-attend-stack .why-attend-stack__item {
+    margin: 14px 0;
+    padding: 0;
+    min-height: auto;
+  }
+}

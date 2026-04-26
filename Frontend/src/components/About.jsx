@@ -37,7 +37,7 @@ export default function About({ isLightMode }) {
             <span className="text-primary-container">A CULTURAL RELAY.</span>
           </h2>
           <div className={`space-y-6 text-lg leading-relaxed max-w-lg ${isVisible ? 'animate-fade-in-left' : 'reveal-hidden'} ${isLightMode ? 'text-[#5a321d]' : 'text-on-surface-variant'}`} style={{ animationDelay: '0.6s' }}>
-            <p>Experience Rajasthan like never before. The Jaipur Ultra takes you from the misty shores of Jal Mahal, through the historic Pink City gates, and out into the raw, unforgiving grit of the Aravalli foothills.</p>
+            <p>Experience Rajasthan like never before. The Jaipur Ultra takes you from the misty shores of Jal Mahal, through the historic Amer fort, and out into the raw, unforgiving grit of the Aravalli foothills.</p>
             <p>This isn't about personal bests; it's about endurance in its purest form. Traverse ancient fort paths and sandy riverbeds under the desert sun.</p>
           </div>
           <div className={isVisible ? 'animate-fade-in-left' : 'reveal-hidden'} style={{ animationDelay: '0.8s' }}>
