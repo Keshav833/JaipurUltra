@@ -25,7 +25,7 @@ export default function About({ isLightMode }) {
   return (
     <section ref={sectionRef} className={`relative min-h-[85vh] md:min-h-screen overflow-hidden ${isLightMode ? 'bg-background' : 'bg-surface'}`}>
       {/* Top Section Fade */}
-      <div className="absolute inset-x-0 top-0 z-20 h-32 pointer-events-none bg-gradient-to-b from-background to-transparent"></div>
+      <div className="absolute inset-x-0 top-0 z-20 h-32 pointer-events-none bg-linear-to-b from-background to-transparent"></div>
       
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 h-full">
         <div className="relative z-30 p-8 py-20 md:p-24 flex flex-col justify-center space-y-10 border-r border-outline-variant/10">
@@ -57,12 +57,12 @@ export default function About({ isLightMode }) {
           />
           
           {/* Mobile Gradients (Always on the right as background) */}
-          <div className={`absolute inset-0 md:hidden ${isLightMode ? 'bg-gradient-to-r from-background via-background/40 to-transparent' : 'bg-gradient-to-r from-surface via-surface/60 to-transparent'}`}></div>
+          <div className={`absolute inset-0 md:hidden ${isLightMode ? 'bg-linear-to-r from-background via-background/40 to-transparent' : 'bg-linear-to-r from-surface via-surface/60 to-transparent'}`}></div>
           
           {/* Desktop Overlay Effects */}
           <div className="hidden md:block absolute inset-0 bg-background/20"></div>
-          <div className="hidden md:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-          <div className="hidden md:block absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-background via-background/60 to-transparent"></div>
+          <div className="hidden md:block absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-background via-background/60 to-transparent"></div>
+          <div className="hidden md:block absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-background via-background/60 to-transparent"></div>
         </div>
       </div>
     </section>

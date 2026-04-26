@@ -55,14 +55,14 @@ export default function WhyAttend({ isLightMode }) {
 
   const renderCard = (reason, index, isStacked = false) => (
     <div 
-      className={`group relative p-8 h-full min-h-[280px] flex flex-col justify-between overflow-hidden rounded-[1.5rem] transition-all duration-500 [will-change:transform] ${isLightMode ? 'bg-white shadow-[0_20px_50px_rgba(122,74,43,0.08)] hover:shadow-[0_40px_80px_rgba(122,74,43,0.15)]' : 'bg-surface-container-low border border-white/5 shadow-2xl hover:bg-surface-container-high'}`}
+      className={`group relative p-8 h-full min-h-[280px] flex flex-col justify-between overflow-hidden rounded-3xl transition-all duration-500 will-change-transform ${isLightMode ? 'bg-white shadow-[0_20px_50px_rgba(122,74,43,0.08)] hover:shadow-[0_40px_80px_rgba(122,74,43,0.15)]' : 'bg-surface-container-low border border-white/5 shadow-2xl hover:bg-surface-container-high'}`}
       style={{ '--bg-image': `url(${reason.image})` }}
     >
       {/* Background Image Layer */}
-      <div className={`absolute inset-0 z-10 opacity-0 bg-cover bg-center bg-[image:var(--bg-image)] ${!isStacked ? 'group-hover:opacity-100' : 'opacity-10 md:group-hover:opacity-100'} transition-opacity duration-700 ease-out pointer-events-none scale-110 group-hover:scale-100`} />
+      <div className={`absolute inset-0 z-10 opacity-0 bg-cover bg-center bg-(image:--bg-image) ${!isStacked ? 'group-hover:opacity-100' : 'opacity-10 md:group-hover:opacity-100'} transition-opacity duration-700 ease-out pointer-events-none scale-110 group-hover:scale-100`} />
       
       {/* Dark Overlay for Text Legibility */}
-      <div className={`absolute inset-0 z-[11] opacity-0 ${!isStacked ? 'group-hover:opacity-60' : 'opacity-20 md:group-hover:opacity-60'} bg-black transition-opacity duration-500 pointer-events-none`} />
+      <div className={`absolute inset-0 z-11 opacity-0 ${!isStacked ? 'group-hover:opacity-60' : 'opacity-20 md:group-hover:opacity-60'} bg-black transition-opacity duration-500 pointer-events-none`} />
 
       {/* Content Layer - Topmost */}
       <div className="relative z-20 space-y-6 pointer-events-none">

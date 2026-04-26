@@ -429,13 +429,13 @@ export default function Home() {
           <div
             className={`absolute inset-x-0 top-0 z-[-1] h-[46%] ${isLightMode ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0))]' : 'bg-[linear-gradient(180deg,rgba(73,85,150,0.42),rgba(0,0,0,0))]'}`}
           />
-          <div className="absolute inset-x-0 bottom-0 z-[-1] h-[20%] bg-gradient-to-b from-transparent via-background/48 to-background" />
+          <div className="absolute inset-x-0 bottom-0 z-[-1] h-[20%] bg-linear-to-b from-transparent via-background/48 to-background" />
 
           {/* Background Clouds */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-2]">
             {/* Left Clouds - move left when scrolling */}
             <div 
-              className="absolute top-[8%] left-[8%] w-[18vw] [will-change:transform]" 
+              className="absolute top-[8%] left-[8%] w-[18vw] will-change-transform"
               style={{ transform: `translateX(-${scrollY * 0.25}px) translateZ(0)` }}
             >
               <img 
@@ -448,7 +448,7 @@ export default function Home() {
               />
             </div>
             <div 
-              className="absolute top-[32%] left-[22%] w-[14vw] [will-change:transform]" 
+              className="absolute top-[32%] left-[22%] w-[14vw] will-change-transform"
               style={{ transform: `translateX(-${scrollY * 0.15}px) translateZ(0)` }}
             >
               <img 
@@ -463,7 +463,7 @@ export default function Home() {
  
             {/* Right Clouds - move right when scrolling */}
             <div 
-              className="absolute top-[12%] right-[12%] w-[22vw] [will-change:transform]" 
+              className="absolute top-[12%] right-[12%] w-[22vw] will-change-transform"
               style={{ transform: `translateX(${scrollY * 0.3}px) translateZ(0)` }}
             >
               <img 
@@ -476,7 +476,7 @@ export default function Home() {
               />
             </div>
             <div 
-              className="absolute top-[28%] right-[25%] w-[19vw] [will-change:transform]" 
+              className="absolute top-[28%] right-[25%] w-[19vw] will-change-transform"
               style={{ transform: `translateX(${scrollY * 0.2}px) translateZ(0)` }}
             >
               <img 
@@ -491,7 +491,7 @@ export default function Home() {
           </div>
 
           <div 
-            className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12 [will-change:transform,opacity]"
+            className="absolute inset-x-0 top-0 mx-auto flex w-full max-w-none flex-col items-center px-6 pb-14 pt-28 md:px-8 md:pb-16 md:pt-36 lg:px-12 will-change-[transform,opacity]"
             style={{ transform: `translateY(-${scrollY * 0.25}px) translateZ(0)`, opacity: Math.max(0, 1 - scrollY / 600) }}
           >
             <div className="mt-4 max-w-4xl space-y-4 md:-mt-2">
@@ -578,7 +578,7 @@ export default function Home() {
         >
           <div className="mx-auto max-w-7xl">
             <div
-              className={`relative overflow-hidden rounded-[2rem] px-6 py-16 md:px-10 lg:px-14 ${
+              className={`relative overflow-hidden rounded-4xl px-6 py-16 md:px-10 lg:px-14 ${
                 isLightMode
                   ? 'bg-surface shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
                   : 'bg-surface-container shadow-[0_30px_120px_rgba(0,0,0,0.45)] border border-white/5'
@@ -587,15 +587,15 @@ export default function Home() {
               <div
                 className={`pointer-events-none absolute inset-y-0 left-0 w-20 md:w-32 ${
                   isLightMode
-                    ? 'bg-gradient-to-r from-surface via-surface/80 to-transparent'
-                    : 'bg-gradient-to-r from-surface-container via-surface-container/80 to-transparent'
+                    ? 'bg-linear-to-r from-surface via-surface/80 to-transparent'
+                    : 'bg-linear-to-r from-surface-container via-surface-container/80 to-transparent'
                 }`}
               />
               <div
                 className={`pointer-events-none absolute inset-y-0 right-0 w-20 md:w-32 ${
                   isLightMode
-                    ? 'bg-gradient-to-l from-surface via-surface/80 to-transparent'
-                    : 'bg-gradient-to-l from-surface-container via-surface-container/80 to-transparent'
+                    ? 'bg-linear-to-l from-surface via-surface/80 to-transparent'
+                    : 'bg-linear-to-l from-surface-container via-surface-container/80 to-transparent'
                 }`}
               />
               <div className="mx-auto max-w-3xl text-center">
@@ -623,8 +623,8 @@ export default function Home() {
                     key={`${item.name}-${index}`}
                     className={`min-w-[85vw] snap-center rounded-[2.2rem] p-8 backdrop-blur-sm transition-all duration-500 flex flex-col justify-between ${
                       isLightMode
-                        ? 'border border-[#e7cdbb] bg-gradient-to-b from-white/95 to-[#fff2e5]/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
-                        : 'border border-outline-variant/30 bg-gradient-to-b from-surface-container-high/95 to-surface-container/90 shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
+                        ? 'border border-[#e7cdbb] bg-linear-to-b from-white/95 to-[#fff2e5]/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
+                        : 'border border-outline-variant/30 bg-linear-to-b from-surface-container-high/95 to-surface-container/90 shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
                     }`}
                   >
                     <p
@@ -670,7 +670,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="relative mt-14 hidden h-[24rem] overflow-hidden lg:block">
+              <div className="relative mt-14 hidden h-96 overflow-hidden lg:block">
                 {testimonials.map((item, index) => {
                   const offset = getTestimonialOffset(index, activeTestimonial, testimonials.length)
                   const isVisible = Math.abs(offset) <= 1
@@ -678,7 +678,7 @@ export default function Home() {
                   return (
                     <article
                       key={item.name}
-                      className={`absolute left-1/2 top-0 w-[34rem] max-w-[calc(100%-3rem)] rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      className={`absolute left-1/2 top-0 w-136 max-w-[calc(100%-3rem)] rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isLightMode
                           ? 'border border-[#e7cdbb] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,236,224,0.98))] shadow-[0_16px_40px_rgba(137,90,59,0.12)]'
                           : 'border border-outline-variant/30 bg-[linear-gradient(180deg,rgba(36,31,27,0.94),rgba(23,19,15,0.98))] shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
@@ -835,8 +835,8 @@ export default function Home() {
         } ${
           isLightMode
             ? "bg-[#df8127] text-white hover:bg-[#c96e1f] shadow-[#df8127]/30"
-            : "bg-[#f36323] text-white hover:bg-[#ff7a3d] shadow-[#f36323]/40"
-        } hover:-translate-y-1 hover:rotate-[360deg]`}
+            : "bg-primary-container text-white hover:bg-[#ff7a3d] shadow-primary-container/40"
+        } hover:-translate-y-1 hover:rotate-360`}
         aria-label="Back to Top"
       >
         <span className="material-symbols-outlined text-3xl font-bold">arrow_upward</span>

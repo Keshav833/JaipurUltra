@@ -72,7 +72,7 @@ export default function RaceCategories() {
     {
       title: "50KM ULTRA",
       distance: "50.0 KM",
-      cutoff: "8.5 HOURS",
+      cutoff: "8 HOURS",
       surface: "Mixed Terrain",
       aidStations: "12 POINTS",
       number: "50"
