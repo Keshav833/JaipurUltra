@@ -139,7 +139,7 @@
 @media (max-width: 599px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 84px;
+    grid-auto-rows: 150px;
     padding: 1em;
   }
 
@@ -147,91 +147,24 @@
     aspect-ratio: auto;
     min-height: 0;
   }
-
-  /* Pinterest-like staggered collage on mobile */
-  .magic-bento-card:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 3;
-  }
-
-  .magic-bento-card:nth-child(2) {
-    grid-row: span 2;
-  }
-
-  .magic-bento-card:nth-child(3) {
-    grid-row: span 3;
-  }
-
-  .magic-bento-card:nth-child(4) {
-    grid-row: span 2;
-  }
-
-  .magic-bento-card:nth-child(5) {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .magic-bento-card:nth-child(6) {
-    grid-row: span 3;
-  }
-
-  .magic-bento-card:nth-child(7) {
-    grid-row: span 2;
-  }
 }
 
 @media (min-width: 600px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 100px;
+    grid-auto-rows: 200px;
   }
 
   .magic-bento-card {
     aspect-ratio: auto;
     min-height: 0;
   }
-
-  .magic-bento-card:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 3;
-  }
-
-  .magic-bento-card:nth-child(3),
-  .magic-bento-card:nth-child(6) {
-    grid-row: span 3;
-  }
-
-  .magic-bento-card:nth-child(2),
-  .magic-bento-card:nth-child(4),
-  .magic-bento-card:nth-child(7) {
-    grid-row: span 2;
-  }
-
-  .magic-bento-card:nth-child(5) {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
 }
 
 @media (min-width: 1024px) {
   .card-grid {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  .magic-bento-card:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 2;
-    aspect-ratio: auto;
-  }
-
-  .magic-bento-card:nth-child(2) {
-    grid-column: span 2;
-    aspect-ratio: auto;
-  }
-
-  .magic-bento-card:nth-child(5) {
-    grid-column: span 2;
-    aspect-ratio: auto;
+    grid-auto-rows: 250px;
   }
 }
 

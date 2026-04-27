@@ -474,7 +474,7 @@ const MagicBento = ({
       <BentoCardGrid gridRef={gridRef}>
         {images.map((img, index) => {
           const raceData = raceLabels[index % raceLabels.length];
-          const baseClassName = `magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`;
+          const baseClassName = `magic-bento-card ${img.className || ''} ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`;
           const cardProps = {
             className: baseClassName,
             style: {
@@ -485,7 +485,7 @@ const MagicBento = ({
           const cardContent = (
             <>
               <div className="magic-bento-card__bg">
-                <img src={img.src} alt={img.alt} className="magic-bento-card__img" />
+                <img src={img.src} alt={img.alt} className="magic-bento-card__img" style={img.style} />
                 <div className="magic-bento-card__overlay" />
               </div>
             </>

@@ -161,7 +161,10 @@ export default function RouteMap({ isLightMode = false }) {
               Jaipur Ultra Route
             </span>
           </div>
-          <div ref={mapContainerRef} className="h-[360px] sm:h-[430px] lg:h-[500px] w-full" />
+          <div 
+            ref={mapContainerRef} 
+            className={`h-[360px] sm:h-[430px] lg:h-[500px] w-full ${!isLightMode ? 'map-tiles-bright' : ''}`} 
+          />
           <div className="bg-[#1A1A2E] px-5 py-3 flex items-center justify-between">
             <span className="font-title text-[10px] tracking-[0.2em] uppercase text-white/45">
               100% Road · 50 KM · 8hr cutoff

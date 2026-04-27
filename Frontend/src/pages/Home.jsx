@@ -112,43 +112,73 @@ const faqs = [
     answer:
       'We recommend:\n\n• Hydration pack or handheld bottles\n• Cap or headgear for sun protection\n• Energy gels or snacks\n• Lightweight running apparel suitable for winter mornings in Jaipur\n• A sense of adventure!',
   },
+  {
+    question: 'When will I receive my race bib?',
+    answer:
+      'Bibs will be distributed at the Expo on 31st October between 2:00 PM and 4:00 PM. The race briefing will take place at 4:00 PM immediately after bib distribution.',
+  },
 ]
 
 const galleryImages = [
   {
-    src: '/images1.jpg',
+    src: '/image1.JPG',
     alt: 'Jaipur Ultra event gallery image 1',
-    className: 'col-span-2 row-span-2',
+    className: 'md:col-span-2 md:row-span-2',
+    style: { objectPosition: 'center 35%' }
   },
   {
-    src: '/images2.jpg',
+    src: '/image2.jpg',
     alt: 'Jaipur Ultra event gallery image 2',
-    className: '',
+    className: 'md:col-span-1 md:row-span-1',
+    style: { objectPosition: 'top' }
   },
   {
-    src: '/images3.jpg',
+    src: '/image3.JPG',
     alt: 'Jaipur Ultra event gallery image 3',
-    className: 'row-span-2',
+    className: 'md:col-span-1 md:row-span-2',
+    style: { objectPosition: 'top' }
   },
   {
-    src: '/images4.jpg',
+    src: '/image4.JPG',
     alt: 'Jaipur Ultra event gallery image 4',
-    className: '',
+    className: 'md:col-span-1 md:row-span-1',
+    style: { objectPosition: 'top' }
   },
   {
-    src: '/images5.jpg',
+    src: '/image5.JPG',
     alt: 'Jaipur Ultra event gallery image 5',
-    className: 'col-span-2',
+    className: 'md:col-span-1 md:row-span-3',
+    style: { objectPosition: 'top' }
   },
   {
-    src: '/images6.jpg',
+    src: '/image6.JPG',
     alt: 'Jaipur Ultra event gallery image 6',
-    className: '',
+    className: 'md:col-span-2 md:row-span-2',
+    style: { objectPosition: 'top' }
   },
   {
-    src: '/images7.jpg',
+    src: '/image7.JPG',
     alt: 'Jaipur Ultra event gallery image 7',
-    className: '',
+    className: 'md:col-span-1 md:row-span-2',
+    style: { objectPosition: 'top' }
+  },
+  {
+    src: '/image8.JPG',
+    alt: 'Jaipur Ultra event gallery image 8',
+    className: 'md:col-span-1 md:row-span-3',
+    style: { objectPosition: 'top' }
+  },
+  {
+    src: '/image9.JPG',
+    alt: 'Jaipur Ultra event gallery image 9',
+    className: 'md:col-span-2 md:row-span-2',
+    style: { objectPosition: 'top' }
+  },
+  {
+    src: '/image10.JPG',
+    alt: 'Jaipur Ultra event gallery image 10',
+    className: 'md:col-span-1 md:row-span-1',
+    style: { objectPosition: 'top' }
   },
 ]
 
@@ -200,7 +230,7 @@ function FAQItem({ faq, isOpen, onToggle, isLightMode }) {
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-6 py-4 text-left transition-all"
+        className="flex w-full items-center justify-between gap-6 py-3 text-left transition-all"
       >
         <div className="relative flex-1 overflow-hidden">
           <span className={`block font-title text-2xl uppercase tracking-[0.05em] transition-all duration-500 md:text-3xl ${isOpen ? 'translate-x-4 text-primary-container' : (isLightMode ? 'text-[#2f1c12]' : 'text-white')}`}>
@@ -210,8 +240,8 @@ function FAQItem({ faq, isOpen, onToggle, isLightMode }) {
           <div className={`mt-2 h-[2px] transition-all duration-700 ${isOpen ? 'w-full bg-primary-container' : 'w-12 bg-outline-variant/30 group-hover:w-24 group-hover:bg-primary-container/50'}`}></div>
         </div>
 
-        <div className={`flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all duration-500 ${isOpen ? 'rotate-180 border-primary-container bg-primary-container text-on-primary-container shadow-[0_0_25px_rgba(243,99,35,0.4)]' : (isLightMode ? 'border-[#d6aa90] text-[#7a4a2b]' : 'border-white/20 text-white hover:border-white/50')}`}>
-          <span className="material-symbols-outlined text-3xl font-bold">
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${isOpen ? 'rotate-180 border-primary-container bg-primary-container text-on-primary-container shadow-[0_0_25px_rgba(243,99,35,0.4)]' : (isLightMode ? 'border-[#d6aa90] text-[#7a4a2b]' : 'border-white/20 text-white hover:border-white/50')}`}>
+          <span className="material-symbols-outlined text-xl font-bold">
             {isOpen ? 'remove' : 'add'}
           </span>
         </div>

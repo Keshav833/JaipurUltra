@@ -51,6 +51,11 @@
     100% { transform: translateZ(100px) rotateZ(360deg) scale(1); opacity: 1; }
   }
 
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
@@ -184,5 +189,9 @@
     opacity: 0;
     transform: translateX(-30px);
     transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .map-tiles-bright .leaflet-tile-pane {
+    filter: brightness(1.6) contrast(0.9) saturate(0.6);
   }
 }
