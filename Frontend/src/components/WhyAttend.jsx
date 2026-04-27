@@ -66,11 +66,11 @@ export default function WhyAttend({ isLightMode }) {
 
       {/* Content Layer - Topmost */}
       <div className="relative z-20 space-y-6 pointer-events-none">
-        <div className={`font-headline text-5xl text-outline opacity-20 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-2 ${isLightMode ? 'group-hover:text-[#df8127] group-hover:[-webkit-text-stroke-color:#df8127]' : 'group-hover:text-white group-hover:[-webkit-text-stroke-color:white]'}`}>
+        <div className={`font-headline text-5xl text-outline opacity-20 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-2 ${isLightMode ? 'group-hover:text-white group-hover:[-webkit-text-stroke-color:white]' : 'group-hover:text-white group-hover:[-webkit-text-stroke-color:white]'}`}>
           {reason.number}
         </div>
-        <h4 className={`font-headline text-3xl uppercase tracking-wider transition-colors duration-300 ${isLightMode ? 'text-[#2f1c12]' : 'text-on-surface'}`}>{reason.title}</h4>
-        <p className={`leading-relaxed font-body text-lg transition-colors duration-300 ${isLightMode ? 'text-[#5a321d]' : 'text-on-surface-variant'}`}>{reason.description}</p>
+        <h4 className={`font-headline text-3xl uppercase tracking-wider transition-colors duration-300 ${isLightMode ? 'text-[#2f1c12] group-hover:text-white' : 'text-on-surface'}`}>{reason.title}</h4>
+        <p className={`leading-relaxed font-body text-lg transition-colors duration-300 ${isLightMode ? 'text-[#5a321d] group-hover:text-white/90' : 'text-on-surface-variant'}`}>{reason.description}</p>
       </div>
     </div>
   );
