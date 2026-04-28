@@ -32,52 +32,60 @@ const raceCategories = [
 
 const testimonials = [
   {
+    image: '/win1.jpg',
     quote:
-      'The most brutal and beautiful 50K I have ever run. The climb to the fort was punishing but the view was worth every drop of sweat.',
-    name: 'Markus Veldt',
-    detail: '50K FINISHER (2024)',
-    avatar:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80',
+      'Jaipur Ultra was one of the toughest yet most rewarding races I’ve run. The course tested every limit, but the support and energy along the route kept me going. Finishing 50K here is something I’ll always be proud of.',
+    name: 'Ankush Kumar',
+    detail: '50K Winner',
   },
   {
+    image: '/win2.jpg',
     quote:
-      "Jaipur Ultra isn't a race, it's a pilgrimage. The energy of the city waking up as you run through the gates is something I'll never forget.",
-    name: 'Anjali Sharma',
-    detail: '25K CHALLENGER (2025)',
-    avatar:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80',
+      'This was an incredible experience from start to finish. The route, the crowd, and the organization made it special. Winning the 25K here feels amazing, and I’d definitely come back stronger next time.',
+    name: 'Vaishnavi Kaup',
+    detail: '25K Winner',
   },
   {
+    image: '/win3.jpg',
     quote:
-      'Sand, heat, and heritage. A perfect cocktail for any ultra-runner looking for their next level. Rajasthan is simply magical.',
-    name: 'David Chen',
-    detail: '50K FINISHER (2025)',
-    avatar:
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80',
+      'Jaipur Ultra pushes you mentally and physically. It’s not just a race, it’s an experience. The discipline it demands and the satisfaction at the finish line make it worth every step.',
+    name: 'Ankit Sharma',
+    detail: 'Runner Up',
   },
   {
+    image: '/win4.jpg',
     quote:
-      'Everything felt premium, from the aid stations to the route markings. Jaipur Ultra balances tough terrain with incredible race management.',
-    name: 'Rhea Kapoor',
-    detail: '25K FINISHER (2025)',
-    avatar:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=160&q=80',
+      'Running through Jaipur with such an energetic atmosphere was unforgettable. The event was well-organized, and the support throughout the race really helped me push my limits.',
+    name: 'Sonali Bali',
+    detail: 'Runner Up F',
   },
   {
+    image: '/win5.jpg',
     quote:
-      'Running past the forts at sunrise felt unreal. It was one of those races where every kilometer gave you a new memory.',
-    name: 'Omar Haddad',
-    detail: '50K FINISHER (2024)',
-    avatar:
-      'https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=160&q=80',
+      'This race challenged my endurance like never before. The environment, the fellow runners, and the overall vibe made it a memorable journey. Definitely one of my favorite races.',
+    name: 'Devik Choudhary',
+    detail: '2nd Runner Up M',
   },
   {
+    image: '/win6.jpg',
     quote:
-      'I came for the challenge and stayed for the atmosphere. The volunteers, local support, and finish-line energy were absolutely top-tier.',
-    name: 'Sneha Beniwal',
-    detail: 'First-Time Ultra Runner',
-    avatar:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80',
+      'Jaipur Ultra is not just about running, it’s about resilience. The course is tough, but the experience is even more rewarding. It’s a must-run event for anyone serious about long-distance running.',
+    name: 'Vikas Yadav',
+    detail: '25KM 2nd Runner Up',
+  },
+  {
+    image: '/win7.jpg',
+    quote:
+      'From the starting line to the finish, everything was well managed. The route and conditions really test your stamina, but that’s what makes finishing so satisfying.',
+    name: 'Anil Kumar',
+    detail: '25K Runner Up',
+  },
+  {
+    image: '/win8.jpg',
+    quote:
+      'An amazing event with great energy and organization. The support along the route and the spirit of the runners made this an unforgettable experience for me.',
+    name: 'Sugandha Singhal',
+    detail: 'Runner Up F',
   },
 ]
 
@@ -337,6 +345,34 @@ export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const [scrollY, setScrollY] = useState(0)
+
+  const sliderRef = useRef(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+
+  const handleMouseDown = (e) => {
+    if (!sliderRef.current) return
+    setIsDragging(true)
+    setStartX(e.pageX - sliderRef.current.offsetLeft)
+    setScrollLeft(sliderRef.current.scrollLeft)
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || !sliderRef.current) return
+    e.preventDefault()
+    const x = e.pageX - sliderRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    sliderRef.current.scrollLeft = scrollLeft - walk
+  }
 
   useEffect(() => {
     let ticking = false
@@ -643,134 +679,123 @@ export default function Home() {
                     isLightMode ? 'text-[#2f1c12]' : 'text-white'
                   }`}
                 >
-                  The Desert Remembers Every Runner
+                  The Desert Remembers Your Story
                 </h2>
               </div>
 
-              <div className="mt-14 -mx-6 flex overflow-x-auto px-6 pb-8 snap-x snap-mandatory scrollbar-hide lg:hidden gap-5">
+              <div 
+                ref={sliderRef}
+                onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
+                className={`mt-14 -mx-6 flex overflow-x-auto px-6 pb-8 scrollbar-hide lg:hidden gap-5 ${isDragging ? 'cursor-grabbing select-none' : 'snap-x snap-mandatory cursor-grab'}`}
+              >
                 {testimonials.map((item, index) => (
-                  <article
+                  <div
                     key={`${item.name}-${index}`}
-                    className={`min-w-[85vw] snap-center rounded-[2.2rem] p-8 backdrop-blur-sm transition-all duration-500 flex flex-col justify-between ${
-                      isLightMode
-                        ? 'border border-[#e7cdbb] bg-linear-to-b from-white/95 to-[#fff2e5]/90 shadow-[0_16px_40px_rgba(137,90,59,0.08)]'
-                        : 'border border-outline-variant/30 bg-linear-to-b from-surface-container-high/95 to-surface-container/90 shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
-                    }`}
+                    className="min-w-[45vw] h-[260px] snap-center perspective-1000 group"
                   >
-                    <p
-                      className={`min-h-[140px] text-lg leading-relaxed italic ${
-                        isLightMode ? 'text-[#53392b]' : 'text-white/88'
-                      }`}
-                    >
-                      "{item.quote}"
-                    </p>
-
-                    <div className="mt-8 flex items-end justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={item.avatar}
-                          alt={item.name}
-                          className="h-12 w-12 rounded-full object-cover ring-1 ring-white/15"
+                    <div className="relative w-full h-full transition-transform duration-700 preserve-3d">
+                      {/* Front: Image */}
+                      <div className="absolute inset-0 backface-hidden rounded-[2.2rem] overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.3)]">
+                        <img 
+                          src={item.image} 
+                          alt={`Winner ${index + 1}`} 
+                          className="w-full h-full object-cover"
                         />
-                        <div>
-                          <div
-                            className={`font-body text-base font-semibold ${
-                              isLightMode ? 'text-[#2f1c12]' : 'text-white'
-                            }`}
-                          >
+                      </div>
+
+                      {/* Back: Text */}
+                      <div className={`absolute inset-0 backface-hidden rotate-y-180 rounded-[2.2rem] p-5 flex flex-col justify-center items-center text-center shadow-[0_16px_40px_rgba(0,0,0,0.4)] ${
+                        isLightMode
+                          ? 'bg-linear-to-b from-white/95 to-[#e5c7b3]/95 border border-[#e7cdbb]'
+                          : 'bg-linear-to-b from-surface-container-high/95 to-[#080503]/95 border border-outline-variant/30'
+                      }`}>
+                        <div className="text-primary-container font-headline text-4xl leading-none mb-2">"</div>
+                        <div className="overflow-y-auto scrollbar-hide w-full max-h-[160px]">
+                          <p className={`text-xs md:text-sm leading-relaxed italic ${isLightMode ? 'text-[#53392b]' : 'text-white/88'}`}>
+                            {item.quote}
+                          </p>
+                        </div>
+                        <div className="mt-3 shrink-0">
+                          <div className={`font-body text-sm font-semibold uppercase ${isLightMode ? 'text-[#2f1c12]' : 'text-white'}`}>
                             {item.name}
                           </div>
-                          <div className={`text-sm ${isLightMode ? 'text-[#8c6a57]' : 'text-white/55'}`}>
+                          <div className={`text-[10px] uppercase tracking-widest mt-0.5 ${isLightMode ? 'text-[#8c6a57]' : 'text-primary'}`}>
                             {item.detail}
                           </div>
                         </div>
                       </div>
-
-                      <div
-                        className={`inline-flex rounded-full px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
-                          isLightMode
-                            ? 'border border-[#ebc9a8] bg-[#fff2e5] text-[#d97a24]'
-                            : 'border border-primary-container/30 bg-primary-container/10 text-primary-container'
-                        }`}
-                      >
-                        <span className="text-sm tracking-[0.22em]">★★★★★</span>
-                      </div>
                     </div>
-                  </article>
+                  </div>
                 ))}
               </div>
 
-              <div className="relative mt-14 hidden h-96 overflow-hidden lg:block">
+              <div className="relative mt-14 hidden h-[460px] overflow-visible lg:block">
                 {testimonials.map((item, index) => {
                   const offset = getTestimonialOffset(index, activeTestimonial, testimonials.length)
-                  const isVisible = Math.abs(offset) <= 1
+                  const isVisible = Math.abs(offset) <= 2
 
                   return (
-                    <article
+                    <div
                       key={item.name}
-                      className={`absolute left-1/2 top-0 w-136 max-w-[calc(100%-3rem)] rounded-[1.35rem] p-6 backdrop-blur-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                        isLightMode
-                          ? 'border border-[#e7cdbb] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(248,236,224,0.98))] shadow-[0_16px_40px_rgba(137,90,59,0.12)]'
-                          : 'border border-outline-variant/30 bg-[linear-gradient(180deg,rgba(36,31,27,0.94),rgba(23,19,15,0.98))] shadow-[0_16px_40px_rgba(0,0,0,0.4)]'
-                      }`}
+                      className="absolute left-1/2 top-0 w-[320px] h-[420px] max-w-[calc(100%-3rem)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                       style={{
                         transform:
                           offset === 0
                             ? 'translateX(-50%) translateY(0) scale(1)'
-                            : offset < 0
-                              ? 'translateX(-108%) translateY(1.9rem) scale(0.92)'
-                              : 'translateX(8%) translateY(1.9rem) scale(0.92)',
-                        opacity: offset === 0 ? 1 : isVisible ? 0.42 : 0,
-                        filter: offset === 0 ? 'blur(0px)' : isVisible ? 'blur(1.4px)' : 'blur(7px)',
-                        zIndex: offset === 0 ? 3 : isVisible ? 2 : 1,
-                        pointerEvents: isVisible ? 'auto' : 'none',
+                            : offset === -1
+                              ? 'translateX(-115%) translateY(1.9rem) scale(0.92)'
+                              : offset === 1
+                                ? 'translateX(15%) translateY(1.9rem) scale(0.92)'
+                                : offset === -2
+                                  ? 'translateX(-175%) translateY(3.8rem) scale(0.84)'
+                                  : 'translateX(75%) translateY(3.8rem) scale(0.84)',
+                        opacity: offset === 0 ? 1 : Math.abs(offset) === 1 ? 0.6 : Math.abs(offset) === 2 ? 0.25 : 0,
+                        filter: offset === 0 ? 'blur(0px)' : Math.abs(offset) === 1 ? 'blur(1.4px)' : Math.abs(offset) === 2 ? 'blur(3px)' : 'blur(7px)',
+                        zIndex: offset === 0 ? 5 : Math.abs(offset) === 1 ? 4 : Math.abs(offset) === 2 ? 3 : 1,
+                        pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
                       }}
                     >
-                      <p
-                        className={`min-h-28 text-lg leading-relaxed ${
-                          isLightMode ? 'text-[#53392b]' : 'text-white/88'
-                        }`}
-                      >
-                        {item.quote}
-                      </p>
+                      <div className="group perspective-1000 w-full h-full cursor-pointer">
+                        <div className={`relative w-full h-full transition-transform duration-700 preserve-3d ${offset === 0 ? 'group-hover:rotate-y-180' : ''}`}>
+                          {/* Front: Image */}
+                          <div className="absolute inset-0 backface-hidden rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.4)]">
+                            <img 
+                              src={item.image} 
+                              alt={`Winner ${index + 1}`} 
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
 
-                      <div className="mt-8 flex items-end justify-between gap-4">
-                        <div className="flex items-center gap-4">
-                          <img
-                            src={item.avatar}
-                            alt={item.name}
-                            className="h-12 w-12 rounded-full object-cover ring-1 ring-white/15"
-                          />
-                          <div>
-                            <div
-                              className={`font-body text-base font-semibold ${
-                                isLightMode ? 'text-[#2f1c12]' : 'text-white'
-                              }`}
-                            >
-                              {item.name}
-                            </div>
-                            <div className={`text-sm ${isLightMode ? 'text-[#8c6a57]' : 'text-white/55'}`}>
-                              {item.detail}
+                          {/* Back: Text */}
+                          <div className={`absolute inset-0 backface-hidden rotate-y-180 rounded-3xl p-8 flex flex-col justify-center items-center text-center shadow-[0_16px_40px_rgba(0,0,0,0.4)] ${
+                            isLightMode
+                              ? 'bg-linear-to-b from-white/95 to-[#e5c7b3]/95 border border-[#e7cdbb]'
+                              : 'bg-linear-to-b from-surface-container-high/95 to-[#080503]/95 border border-outline-variant/30'
+                          }`}>
+                            <div className="text-primary-container font-headline text-6xl leading-none mb-3">"</div>
+                            <p className={`text-base leading-relaxed italic ${isLightMode ? 'text-[#53392b]' : 'text-white/88'}`}>
+                              {item.quote}
+                            </p>
+                            <div className="mt-6">
+                              <div className={`font-body text-lg font-semibold uppercase ${isLightMode ? 'text-[#2f1c12]' : 'text-white'}`}>
+                                {item.name}
+                              </div>
+                              <div className={`text-xs uppercase tracking-widest mt-1 ${isLightMode ? 'text-[#8c6a57]' : 'text-primary'}`}>
+                                {item.detail}
+                              </div>
                             </div>
                           </div>
                         </div>
-
-                        <div
-                          className={`inline-flex rounded-full px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] ${
-                            isLightMode
-                              ? 'border border-[#ebc9a8] bg-[#fff2e5] text-[#d97a24]'
-                              : 'border border-primary-container/30 bg-primary-container/10 text-primary-container'
-                          }`}
-                        >
-                          <span className="text-sm tracking-[0.22em]">★★★★★</span>
-                        </div>
                       </div>
-                    </article>
+                    </div>
                   )
                 })}
               </div>
 
-              <div className="mt-10 flex items-center justify-center gap-4">
+              <div className="mt-10 hidden items-center justify-center gap-4 lg:flex">
                 <button
                   type="button"
                   onClick={() =>
