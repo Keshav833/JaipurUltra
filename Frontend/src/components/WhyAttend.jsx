@@ -29,7 +29,7 @@ export default function WhyAttend({ isLightMode }) {
     {
       number: "02",
       title: "ELITE LOGISTICS",
-      description: "Fully loaded every 6KM with medical support and aid stations every 4KM with medical support.",
+      description: "Fully loaded every 8KM with medical support and aid stations",
       image: img2
     },
     {

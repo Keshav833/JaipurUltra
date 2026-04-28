@@ -11,9 +11,9 @@ const raceCategories = [
     title: '50KM ULTRA',
     stats: [
       ['Distance', '50.0 KM'],
-      ['Cut-off', '8.5 HOURS'],
+      ['Cut-off', ' 7 HOURS'],
       ['Surface', 'Mixed Terrain'],
-      ['Aid Stations', '12 POINTS'],
+      ['Aid Stations', '5 POINTS'],
     ],
   },
   {
@@ -21,9 +21,9 @@ const raceCategories = [
     title: '25KM CHALLENGE',
     stats: [
       ['Distance', '25.0 KM'],
-      ['Cut-off', '4.0 HOURS'],
+      ['Cut-off', ' 3 HOURS'],
       ['Surface', 'Road & Trail'],
-      ['Aid Stations', '6 POINTS'],
+      ['Aid Stations', '3 POINTS'],
     ],
   },
 ]
