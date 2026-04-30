@@ -346,34 +346,6 @@ export default function Home() {
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const [scrollY, setScrollY] = useState(0)
 
-  const sliderRef = useRef(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollLeft, setScrollLeft] = useState(0)
-
-  const handleMouseDown = (e) => {
-    if (!sliderRef.current) return
-    setIsDragging(true)
-    setStartX(e.pageX - sliderRef.current.offsetLeft)
-    setScrollLeft(sliderRef.current.scrollLeft)
-  }
-
-  const handleMouseLeave = () => {
-    setIsDragging(false)
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  const handleMouseMove = (e) => {
-    if (!isDragging || !sliderRef.current) return
-    e.preventDefault()
-    const x = e.pageX - sliderRef.current.offsetLeft
-    const walk = (x - startX) * 2
-    sliderRef.current.scrollLeft = scrollLeft - walk
-  }
-
   useEffect(() => {
     let ticking = false
     const handleScroll = () => {
@@ -683,50 +655,38 @@ export default function Home() {
                 </h2>
               </div>
 
-              <div 
-                ref={sliderRef}
-                onMouseDown={handleMouseDown}
-                onMouseLeave={handleMouseLeave}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-                className={`mt-14 -mx-6 flex overflow-x-auto px-6 pb-8 scrollbar-hide lg:hidden gap-5 ${isDragging ? 'cursor-grabbing select-none' : 'snap-x snap-mandatory cursor-grab'}`}
+              <div
+                className="testimonial-mobile-scroll mt-10 -mx-6 flex gap-4 overflow-x-auto px-6 pb-8 scrollbar-hide lg:hidden"
               >
                 {testimonials.map((item, index) => (
                   <div
                     key={`${item.name}-${index}`}
-                    className="min-w-[45vw] h-[260px] snap-center perspective-1000 group"
+                    className={`testimonial-mobile-card min-w-[78vw] max-w-[78vw] snap-center overflow-hidden rounded-2xl shadow-[0_16px_36px_rgba(0,0,0,0.24)] sm:min-w-[46vw] sm:max-w-[46vw] ${
+                      isLightMode
+                        ? 'border border-[#e7cdbb] bg-white text-[#2f1c12]'
+                        : 'border border-white/10 bg-surface-container-high text-white'
+                    }`}
                   >
-                    <div className="relative w-full h-full transition-transform duration-700 preserve-3d">
-                      {/* Front: Image */}
-                      <div className="absolute inset-0 backface-hidden rounded-[2.2rem] overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.3)]">
-                        <img 
-                          src={item.image} 
-                          alt={`Winner ${index + 1}`} 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      {/* Back: Text */}
-                      <div className={`absolute inset-0 backface-hidden rotate-y-180 rounded-[2.2rem] p-5 flex flex-col justify-center items-center text-center shadow-[0_16px_40px_rgba(0,0,0,0.4)] ${
-                        isLightMode
-                          ? 'bg-linear-to-b from-white/95 to-[#e5c7b3]/95 border border-[#e7cdbb]'
-                          : 'bg-linear-to-b from-surface-container-high/95 to-[#080503]/95 border border-outline-variant/30'
-                      }`}>
-                        <div className="text-primary-container font-headline text-4xl leading-none mb-2">"</div>
-                        <div className="overflow-y-auto scrollbar-hide w-full max-h-[160px]">
-                          <p className={`text-xs md:text-sm leading-relaxed italic ${isLightMode ? 'text-[#53392b]' : 'text-white/88'}`}>
-                            {item.quote}
-                          </p>
+                    <div className="relative aspect-[4/5] overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={`Winner ${index + 1}`}
+                        className="h-full w-full object-cover"
+                        loading={index > 1 ? 'lazy' : 'eager'}
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/75 via-black/35 to-transparent p-4 pt-16">
+                        <div className="font-body text-base font-semibold uppercase text-white">
+                          {item.name}
                         </div>
-                        <div className="mt-3 shrink-0">
-                          <div className={`font-body text-sm font-semibold uppercase ${isLightMode ? 'text-[#2f1c12]' : 'text-white'}`}>
-                            {item.name}
-                          </div>
-                          <div className={`text-[10px] uppercase tracking-widest mt-0.5 ${isLightMode ? 'text-[#8c6a57]' : 'text-primary'}`}>
-                            {item.detail}
-                          </div>
+                        <div className="mt-1 text-[10px] uppercase tracking-widest text-primary">
+                          {item.detail}
                         </div>
                       </div>
+                    </div>
+                    <div className="p-4">
+                      <p className={`line-clamp-5 text-sm leading-relaxed italic ${isLightMode ? 'text-[#53392b]' : 'text-white/82'}`}>
+                        {item.quote}
+                      </p>
                     </div>
                   </div>
                 ))}

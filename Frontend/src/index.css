@@ -202,4 +202,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .testimonial-mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 1.5rem;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x pan-y;
+  }
+
+  .testimonial-mobile-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 360px 520px;
+    transform: translateZ(0);
+  }
 }
