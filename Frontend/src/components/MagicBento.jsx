@@ -459,6 +459,33 @@ const MagicBento = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
 
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const cards = gridRef.current.children;
+    gsap.set(cards, { y: 60, opacity: 0 });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(cards, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+          });
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    observer.observe(gridRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {enableSpotlight && (

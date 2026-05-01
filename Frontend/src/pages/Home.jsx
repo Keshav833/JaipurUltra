@@ -407,7 +407,7 @@ export default function Home() {
               FAQ
             </a>
             <a className={`transition-colors ${isLightMode ? 'hover:text-[#b85c18]' : 'hover:text-[#ffdfc7]'}`} href="#footer">
-              Contact
+              Feedback
             </a>
           </div>
           <div className="flex items-center gap-3">
@@ -439,7 +439,7 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section className="relative overflow-hidden text-center">
+        <section className="relative isolate overflow-hidden bg-transparent text-center">
           <div className="relative z-[-4]">
             {/* Desktop Hero Image */}
             <img
@@ -447,7 +447,7 @@ export default function Home() {
               alt="Jaipur Ultra desktop backdrop"
               width={1920}
               height={1080}
-              className="hidden h-auto w-full md:block"
+              className="hidden h-auto w-full max-w-none md:block"
             />
             {/* Mobile Hero Image */}
             <img
@@ -455,17 +455,14 @@ export default function Home() {
               alt="Jaipur Ultra mobile backdrop"
               width={500}
               height={800}
-              className="block h-auto w-full md:hidden"
+              className="block h-auto w-full max-w-none md:hidden"
             />
           </div>
           <div
-            className={`absolute inset-0 z-[-3] ${isLightMode ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,228,208,0.08)_30%,rgba(255,255,255,0.02)_100%)]' : 'bg-[linear-gradient(180deg,rgba(47,58,115,0.18)_0%,rgba(127,76,129,0.14)_18%,rgba(214,117,88,0.08)_42%,rgba(23,19,15,0.04)_100%)]'}`}
+            className={`absolute inset-0 z-[-3] ${isLightMode ? 'bg-transparent' : 'bg-[linear-gradient(180deg,rgba(47,58,115,0.18)_0%,rgba(127,76,129,0.14)_18%,rgba(214,117,88,0.08)_42%,rgba(23,19,15,0.04)_100%)]'}`}
           />
           <div
-            className={`absolute inset-0 z-[-2] ${isLightMode ? 'bg-[radial-gradient(circle_at_50%_32%,rgba(255,255,255,0.22),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_26%)]' : 'bg-[radial-gradient(circle_at_50%_32%,rgba(255,245,240,0.18),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0)_26%)]'}`}
-          />
-          <div
-            className={`absolute inset-x-0 top-0 z-[-1] h-[46%] ${isLightMode ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0))]' : 'bg-[linear-gradient(180deg,rgba(73,85,150,0.42),rgba(0,0,0,0))]'}`}
+            className={`absolute inset-x-0 top-0 z-[-1] h-[46%] ${isLightMode ? 'bg-transparent' : 'bg-[linear-gradient(180deg,rgba(73,85,150,0.42),rgba(0,0,0,0))]'}`}
           />
           <div className="absolute inset-x-0 bottom-0 z-[-1] h-[20%] bg-linear-to-b from-transparent via-background/48 to-background" />
 
@@ -616,26 +613,12 @@ export default function Home() {
         >
           <div className="mx-auto max-w-7xl">
             <div
-              className={`relative overflow-hidden rounded-4xl px-6 py-16 md:px-10 lg:px-14 ${
-                isLightMode
-                  ? 'bg-surface shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
-                  : 'bg-surface-container shadow-[0_30px_120px_rgba(0,0,0,0.45)] border border-white/5'
-              }`}
+              // className={`relative overflow-hidden rounded-4xl px-6 py-16 md:px-10 lg:px-14 ${
+              //   isLightMode
+              //     ? 'bg-surface shadow-[0_30px_90px_rgba(122,74,43,0.12)]'
+              //     : 'bg-surface-container shadow-[0_30px_120px_rgba(0,0,0,0.45)] border border-white/5'
+              // }`}
             >
-              <div
-                className={`pointer-events-none absolute inset-y-0 left-0 w-20 md:w-32 ${
-                  isLightMode
-                    ? 'bg-linear-to-r from-surface via-surface/80 to-transparent'
-                    : 'bg-linear-to-r from-surface-container via-surface-container/80 to-transparent'
-                }`}
-              />
-              <div
-                className={`pointer-events-none absolute inset-y-0 right-0 w-20 md:w-32 ${
-                  isLightMode
-                    ? 'bg-linear-to-l from-surface via-surface/80 to-transparent'
-                    : 'bg-linear-to-l from-surface-container via-surface-container/80 to-transparent'
-                }`}
-              />
               <div className="mx-auto max-w-3xl text-center">
                 <div
                   className={`inline-flex rounded-full px-4 py-1 font-title text-sm tracking-wide backdrop-blur-sm ${
