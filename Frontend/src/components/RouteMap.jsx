@@ -159,18 +159,9 @@ export default function RouteMap({ isLightMode = false }) {
       zoomControl: true,
       scrollWheelZoom: false,
       attributionControl: true,
+      gestureHandling: true,
     });
     mapRef.current = map;
-    const mapElement = mapContainerRef.current;
-
-    L.DomEvent.disableScrollPropagation(mapElement);
-    L.DomEvent.disableClickPropagation(mapElement);
-
-    const preventPageScroll = (event) => {
-      event.preventDefault();
-    };
-
-    mapElement.addEventListener("touchmove", preventPageScroll, { passive: false });
 
     const tileConfig = isLightMode
       ? {
@@ -243,7 +234,6 @@ export default function RouteMap({ isLightMode = false }) {
     return () => {
       window.clearTimeout(timerId);
       if (frameId) cancelAnimationFrame(frameId);
-      mapElement.removeEventListener("touchmove", preventPageScroll);
       map.remove();
       mapRef.current = null;
     };

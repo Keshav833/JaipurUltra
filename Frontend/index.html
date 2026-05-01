@@ -3,15 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     
+    <!-- Preconnect to map tile servers for faster loading -->
+    <link rel="preconnect" href="https://a.tile.openstreetmap.org">
+    <link rel="preconnect" href="https://b.tile.openstreetmap.org">
+    <link rel="preconnect" href="https://c.tile.openstreetmap.org">
+    <link rel="preconnect" href="https://a.basemaps.cartocdn.com">
+    <link rel="preconnect" href="https://b.basemaps.cartocdn.com">
+    <link rel="preconnect" href="https://c.basemaps.cartocdn.com">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JAIPUR ULTRA | Run the Pink Legacy</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;700&family=Barlow:wght@400;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css"/>
   </head>
   <body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
     <div id="root"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.js"></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

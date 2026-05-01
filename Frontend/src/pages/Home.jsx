@@ -1,10 +1,38 @@
-import { useEffect, useMemo, useState, useRef } from 'react'
-import RaceCategories from '../components/RaceCategories'
-import RouteMap from '../components/RouteMap'
-import WhyAttend from '../components/WhyAttend'
-import Footer from '../components/Footer'
-import MagicBento from '../components/MagicBento'
-import About from '../components/About'
+import { useEffect, useMemo, useState, useRef, lazy, Suspense } from 'react'
+
+const RaceCategories = lazy(() => import('../components/RaceCategories'))
+const RouteMap = lazy(() => import('../components/RouteMap'))
+const WhyAttend = lazy(() => import('../components/WhyAttend'))
+const Footer = lazy(() => import('../components/Footer'))
+const MagicBento = lazy(() => import('../components/MagicBento'))
+const About = lazy(() => import('../components/About'))
+
+function LazySection({ children, minHeight = '50vh' }) {
+  const [show, setShow] = useState(false)
+  const ref = useRef()
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true)
+          obs.disconnect()
+        }
+      },
+      { rootMargin: '300px' }
+    )
+    if (ref.current) {
+      obs.observe(ref.current)
+    }
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} style={{ minHeight: show ? 'auto' : minHeight }}>
+      {show && <Suspense fallback={<div style={{ minHeight }} />}>{children}</Suspense>}
+    </div>
+  )
+}
 const raceCategories = [
   {
     distance: '50',
@@ -345,6 +373,24 @@ export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const [scrollY, setScrollY] = useState(0)
+  const heroRef = useRef(null)
+
+  useEffect(() => {
+    if (!heroRef.current) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        const elements = heroRef.current?.querySelectorAll('.animate-float')
+        if (elements) {
+          elements.forEach(el => {
+            el.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused'
+          })
+        }
+      },
+      { threshold: 0 }
+    )
+    obs.observe(heroRef.current)
+    return () => obs.disconnect()
+  }, [])
 
   useEffect(() => {
     let ticking = false
@@ -439,7 +485,7 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section className="relative isolate overflow-hidden bg-transparent text-center">
+        <section ref={heroRef} className="relative isolate overflow-hidden bg-transparent text-center">
           <div className="relative z-[-4]">
             {/* Desktop Hero Image */}
             <img
@@ -582,11 +628,17 @@ export default function Home() {
           </div>
         </section>
 
-        <About isLightMode={isLightMode} />
+        <LazySection minHeight="50vh">
+          <About isLightMode={isLightMode} />
+        </LazySection>
 
-        <RaceCategories />
+        <LazySection minHeight="50vh">
+          <RaceCategories />
+        </LazySection>
 
-        <RouteMap isLightMode={isLightMode} />
+        <LazySection minHeight="50vh">
+          <RouteMap isLightMode={isLightMode} />
+        </LazySection>
 
         <section id="gallery" className="py-24 bg-surface-container-lowest">
           <div className="mx-auto mb-16 max-w-[1440px] px-6 md:px-8">
@@ -594,19 +646,23 @@ export default function Home() {
               THE GRIT IN <span className="text-primary-container">MOTION</span>
             </h2>
           </div>
-          <MagicBento 
-            images={galleryImages} 
-            enableTilt={false} 
-            enableMagnetism={false}
-            enableSpotlight={false}
-            enableStars={false}
-            particleCount={0}
-            enableBorderGlow={true}
-            // enableSpotlight={false}
-          />
+          <LazySection minHeight="50vh">
+            <MagicBento 
+              images={galleryImages} 
+              enableTilt={false} 
+              enableMagnetism={false}
+              enableSpotlight={false}
+              enableStars={false}
+              particleCount={0}
+              enableBorderGlow={true}
+              // enableSpotlight={false}
+            />
+          </LazySection>
         </section>
 
-        <WhyAttend isLightMode={isLightMode} />
+        <LazySection minHeight="50vh">
+          <WhyAttend isLightMode={isLightMode} />
+        </LazySection>
 
         <section
           className={`overflow-hidden px-6 py-24 md:px-8 ${isLightMode ? 'bg-background' : 'bg-surface'}`}
@@ -812,7 +868,9 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer isLightMode={isLightMode} />
+      <LazySection minHeight="20vh">
+        <Footer isLightMode={isLightMode} />
+      </LazySection>
 
       <div className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-4 lg:flex">
         <div className="relative h-32 w-px bg-outline-variant/30">
